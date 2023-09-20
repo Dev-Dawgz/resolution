@@ -139,3 +139,24 @@ textarea {
       align-items: center;
     }
 }
+
+/* //// CONTROVERSY COMPONENT */
+.con-component {
+  margin-top: 8em;
+  display: flex;
+  flex-direction: column;
+}
+
+.wof-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+}
+
+.wof-users-component {
+  width: auto;
+  height: auto;
+  padding: 10px 10px 50px 30px;
+  margin-right: 2em;
+}

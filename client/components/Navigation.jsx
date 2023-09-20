@@ -94,11 +94,21 @@ const Navigation = () => {
                 <NavLink
                   className="nav-link"
                   href="#"
+                  to="/Controversy"
+                  onClick={handleCollapseNav}
+                >
+                  Controversy
+                </NavLink> 
+              </li>
+              <li className="nav-item" role="navigation">
+                <NavLink
+                  className="nav-link"
+                  href="#"
                   to="/UserProfile"
                   onClick={handleCollapseNav}
                 >
                   My Profile
-                </NavLink>
+                </NavLink> 
               </li>
             </ul>
           </div>

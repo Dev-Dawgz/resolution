@@ -1,10 +1,12 @@
-import React from "react";
-import axios from "axios";
-
 const Controversy = () => {
   return (
-    <div>
-      <h1>Hey Im rendering</h1>
+    <div className='con-component container'>
+      <div className="con-header-container">
+        <div className='con-users-component'>
+          <h1 className="text-primary">Controversy</h1>
+      
+        </div>
+      </div>
     </div>
   );
 };

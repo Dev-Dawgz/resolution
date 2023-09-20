@@ -199,6 +199,17 @@ const Home = ({ user, changePoints }) => {
             Our top 10 Resolution users will be featured on the Wall of Fame.
           </p>
         </div>
+        <hr></hr>
+        <div className="controversy-intro">
+          <h2 className="text-primary">
+            <Link className="link" to="/Controversy">
+            😨 Controversy
+            </Link>
+          </h2>
+          <p>
+            Start some S#@!
+          </p>
+        </div>
       </main>
     </div>
   );

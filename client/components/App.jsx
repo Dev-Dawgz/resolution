@@ -8,7 +8,7 @@ import Navigation from "./Navigation.jsx";
 import axios from "axios";
 import Messages from "./MessageComponents/Messages.jsx";
 import SignUp from "./SignUp.jsx";
-import Controversy from "./Controversy.jsx";
+import Controversy from './Controversy.jsx';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -246,7 +246,6 @@ const App = () => {
             element={<DecisionMaker changePoints={changePoints} user={user} />}
           />
           <Route
-            exact
             path="/Controversy"
             element={<Controversy />}
           />
