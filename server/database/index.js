@@ -112,10 +112,27 @@ const Void = sequelize.define('Void', {
   likes: DataTypes.INTEGER
 }, {timestamps: true});
 
+const News = sequelize.define('Void', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  headline: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    }
+  }
+}, {timestamps: true});
+
 module.exports = {
   db: sequelize,
   Users,
   Messages,
   Conversations,
-  Void
+  Void,
+  News
 };
