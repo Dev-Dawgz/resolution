@@ -11,7 +11,7 @@ newsRouter.use(express.urlencoded({extended: true}));
 newsRouter.get('/api', (req, res) => {
   getNews()
     .then((newsStories) => {
-      res.send(newsStories).status(200);
+      res.send(newsStories.data).status(200);
     })
     .catch((err) => {
       console.error('Could not GET newsStories', err);
@@ -21,7 +21,7 @@ newsRouter.get('/api', (req, res) => {
 
 
 //POST news headline to news database
-newsRouter.post('/api', (req, res) => {
+newsRouter.post('/', (req, res) => {
   const { title } = req.body;
   News.create({headline: title})
     .then(() => {

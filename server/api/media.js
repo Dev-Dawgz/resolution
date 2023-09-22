@@ -7,7 +7,7 @@ const getNews = () => {
   return axios.get(newsUrl)
     .then((newsData) => {
       console.log('Retrieved news from API');
-      return newsData; 
+      return newsData.data; 
     })
     .catch((err) => {
       console.error('Failed to retrieve news from API', err);

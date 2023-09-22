@@ -112,7 +112,7 @@ const Void = sequelize.define('Void', {
   likes: DataTypes.INTEGER
 }, {timestamps: true});
 
-const News = sequelize.define('Void', {
+const News = sequelize.define('News', {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,

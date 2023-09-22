@@ -1,22 +1,24 @@
 import axios from 'axios';
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const [newsPost, setNewsPost] = useState([]);
 
 const Controversy = () => {
+  const [headline, setHeadline] = useState('');
 
-  const getHeadlines = async () => {
-    await axios.get('news/api/')
+  const getHeadlines = () => {
+    axios.get('/news/api')
       .then((newsStories) => {
-        setNewsPost(newsStories);
+        setHeadline(newsStories.data[Math.floor(Math.random() * 26)]);
+        newsStories.data.forEach(element => {
+          axios.post('/news', element);
+        });
       })
       .catch((err) => {
         console.error('Could not retrieve newsStories array', err);
       });
   };
-  useEffect(() => {
-    getHeadlines();
-  });
+  console.log(headline.title);// posting headline to page to the page
+
 
 
 
@@ -25,6 +27,11 @@ const Controversy = () => {
       <div className="con-header-container">
         <div className='con-users-component'>
           <h1 className="text-primary">Controversy</h1>
+          <button type="button" 
+            className="btn btn-outline-warning" 
+            onClick={() => { getHeadlines(); }}
+          >Speak 4 Yourself!!!
+          </button>
       
         </div>
       </div>
