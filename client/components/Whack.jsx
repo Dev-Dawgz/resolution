@@ -19,7 +19,7 @@ const Whack = () => {
     toast.info('🦄 Piñata under assault!', {//using .info until fully styled
       //props on toast object to style/modify
       position: "top-right",
-      autoClose: 5000,
+      autoClose: false,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

@@ -11,7 +11,7 @@ import SignUp from "./SignUp.jsx";
 import Whack from "./Whack.jsx";
 import Controversy from './Controversy.jsx';
 //import Notification from "./Notifications.jsx";
-import { Flip, ToastContainer } from "react-toastify";
+import { Flip, Bounce, Slice, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
