@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify'; //notification props
 import axios from 'axios';
 // import { setAuthUser } from './store/appSlice';
 import Canvas from './Canvas.jsx';
@@ -11,6 +12,22 @@ const Whack = () => {
   const [user, setUser] = useState('...'); // set user (your opponent) state
   const [userPhoto, setUserPhoto] = useState(''); //set user photo src
   const [userId, setUserId] = useState(0);
+
+  //function to handle toast/notification onClick/Whack
+  const notify = () => {
+    //toast.warn used to give 'warning' notification message to user on Piñata whack
+    toast.info('🦄 Piñata under assault!', {//using .info until fully styled
+      //props on toast object to style/modify
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   
   const getUser = () => {
     axios.get(`/users/search/${searchInput}`)
@@ -26,9 +43,7 @@ const Whack = () => {
       });
   };
   
-  const handleWhack = () => {
-    socket.emit('test_notify');
-  };
+ 
   
   // value to search username
   const handleChange = (e) => {
@@ -52,8 +67,6 @@ const Whack = () => {
           }
         }}
         value={searchInput}/>
-
-      <Notification userId={userId}/>
       <button className='btn btn-primary'
         type="button"
         onClick={getUser}
@@ -61,8 +74,9 @@ const Whack = () => {
       <h2>Your Piñata of {user}</h2>
       <div>
         <button className='btn btn-primary'
-          onClick={handleWhack}
+          onClick={notify}
         >Whack'em!</button>
+       
       </div>
       <Canvas userPhoto={userPhoto}/>
     </div>
