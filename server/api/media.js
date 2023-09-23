@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const getNews = () => {
   
-  const newsUrl = `http://api.mediastack.com/v1/news?access_key=${process.env.MEDIASTACK_API_KEY}`;
+  const newsUrl = `http://api.mediastack.com/v1/news?access_key=${process.env.MEDIASTACK_API_KEY}&sources=cnn`;
   return axios.get(newsUrl)
     .then((newsData) => {
       console.log('Retrieved news from API');

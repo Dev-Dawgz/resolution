@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { FcNews } from "react-icons/fc";
 
 
 const Controversy = () => {
@@ -26,7 +27,7 @@ const Controversy = () => {
     <div className='con-component container'>
       <div className="con-header-container">
         <div className='con-users-component'>
-          <h1 className="text-primary">Controversy</h1>
+          <h1 className="text-primary">Headlines <FcNews /></h1>
           <p>
             {headline.title}
           </p>
