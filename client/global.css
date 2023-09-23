@@ -112,6 +112,24 @@ textarea {
   padding: 15px 10px 5px 10px;
 }
 
+.pinata {
+  margin-top: 8em;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-component {
+  border: 1px solid black;
+  position: sticky;
+  width: 500px;
+  height: 400px;
+  flex-direction:inherit;
+
+  background: white;
+}
+
+
+
 
 
 /* Sign Up Component */
@@ -159,4 +177,71 @@ textarea {
   height: auto;
   padding: 10px 10px 50px 30px;
   margin-right: 2em;
+}
+.cont-box {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+
+/* ////Notification component */
+
+.notify-container {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  max-width: 300px;
+  background-color: #0d6efd;
+  border: 1px solid black;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(23, 5, 214, 0.2);
+  z-index: 9999;
+  display: none;
+
+
+}
+
+.notify-popup {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #cccccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  max-width: 300px;
+  animation: slideIn 0.5s ease-in-out, fadeOut 0.5s 2s ease-in-out;
+}
+
+.notify-popup button {
+  background-color: #ff5733;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;}
+
+  /* Animation Keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

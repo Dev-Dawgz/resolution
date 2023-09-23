@@ -61,6 +61,29 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//GET request to get user by username
+router.get('/search/:username', async (req, res) => {
+
+  const { username } = req.params;
+
+  try {
+    // Find the user by username in the database
+    const user = await Users.findOne({where: {username: username}});
+
+    if (!user) {
+      // If the user doesn't exist, send a 404 Not Found response
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Respond with the retrieved user
+    res.json(user);
+  } catch (error) {
+    // Handle any errors that occur
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // PATCH request to update a user
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;

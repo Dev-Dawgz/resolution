@@ -110,6 +110,16 @@ const Navigation = () => {
                   My Profile
                 </NavLink> 
               </li>
+              <li className="nav-item" role="navigation">
+                <NavLink
+                  className="nav-link"
+                  href="#"
+                  to="/Whack"
+                  onClick={handleCollapseNav}
+                >
+                  Whack
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

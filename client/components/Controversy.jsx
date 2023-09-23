@@ -27,13 +27,21 @@ const Controversy = () => {
       <div className="con-header-container">
         <div className='con-users-component'>
           <h1 className="text-primary">Controversy</h1>
-          <button type="button" 
+          <p>
+            {headline.title}
+          </p>
+          <button 
             className="btn btn-outline-warning" 
-            onClick={() => { getHeadlines(); }}
-          >Speak 4 Yourself!!!
+            type="button" 
+            data-toggle="collapse" 
+            data-target="#collapseExample" 
+            aria-expanded="false" 
+            aria-controls="collapseExample" 
+            onClick={() => { getHeadlines(); }}>
+              Grab A Headline
           </button>
-      
         </div>
+        <textarea className='cont-box' placeholder='Speak on it...' />
       </div>
     </div>
   );
