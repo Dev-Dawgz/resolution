@@ -6,12 +6,13 @@ const Notification = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => { 
-    console.log(socket.connected);
+    //console.log(socket.id);
 
     //listen for incoming notifications
-    socket.on('test_notify', (message) => {
+    socket.on('notification', (message) => {
+      //notification object 
       const newNotification = {
-        id: Math.random(), 
+        id: 6, 
         message,
         dismissed: false,
       };
@@ -20,7 +21,10 @@ const Notification = () => {
       console.log('Received test notification', message);
     });
     //disconnect on unmount
-    return () => socket.disconnect();
+    return () => {
+      socket.off('notification');
+      socket.disconnect();
+    };
 
   }, []);
 
@@ -32,7 +36,7 @@ const Notification = () => {
       )
     );
   };
-
+  //notify null unless whack, then render notify div with dismiss
   return (
     <div className='notify-container'>
       <h3> Notification</h3>
@@ -44,7 +48,6 @@ const Notification = () => {
           </div>
         ) : null
       )}
-
     </div>
   );
 };
