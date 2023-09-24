@@ -210,6 +210,17 @@ const Home = ({ user, changePoints }) => {
             Start some S#@!
           </p>
         </div>
+        <hr></hr>
+        <div className="hatemail-intro">
+          <h2 className="text-primary">
+            <Link className="link" to="/hatemail">
+            Hatemail
+            </Link>
+          </h2>
+          <p>
+            tell em how you really feel
+          </p>
+        </div>
       </main>
     </div>
   );

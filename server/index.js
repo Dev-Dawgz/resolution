@@ -11,6 +11,7 @@ const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');
 const dmakerRouter = require('./routes/dmakerRouter'); //samson's route
 const homeRouter = require('./routes/homeRouter');
+const hatemailRouter = require('./routes/hatemailRouter');
 
 
 const port = 4000;
@@ -49,6 +50,7 @@ app.use('/users', users);
 app.use('/auth', authRoutes);
 app.use('/wofRoutes', wofRouter);
 app.use('/messagesHandling', messageRouter);
+app.use('/hatemail', hatemailRouter);
 // serve the uploads folder as a static directory
 app.use('/uploads', express.static('server/public/uploads'));
 
@@ -106,8 +108,12 @@ io.sockets.on('connection', (socket) => {
   socket.on('test_notify', (message) => {
 
     socket.emit('notification', 'if you are reading this, your pinata has been violated 👹', message );
-    console.log('pinata assaulted 🪅 🥊 notifying user')
-    
+    console.log('pinata assaulted 🪅 🥊 notifying user');
+  });
+
+  // Listen for the "newHatemail" event from a client
+  socket.on("newHatemail", (data) => {
+    console.log("Received new hatemail:", data);
   });
 
 });

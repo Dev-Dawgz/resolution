@@ -11,6 +11,7 @@ import SignUp from "./SignUp.jsx";
 import Whack from "./Whack.jsx";
 import Controversy from './Controversy.jsx';
 import Notification from "./Notifications.jsx";
+import Hatemail from "./HateMailComponents/HateMail.jsx";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -255,6 +256,10 @@ const App = () => {
           <Route
             path="/Controversy"
             element={<Controversy />}
+          />
+          <Route
+            path="/hatemail"
+            element={<Hatemail />}
           />
         </Route>
       </Routes>

@@ -112,10 +112,73 @@ const Void = sequelize.define('Void', {
   likes: DataTypes.INTEGER
 }, {timestamps: true});
 
+const Mailbox = sequelize.define('Mailbox', {
+  userOneId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  userTwoId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+}, {timestamps: true});
+
+const Hatemail = sequelize.define('Hatemail', {
+  senderId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  recipientId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  conversationId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Conversations,
+      key: 'id'
+    }
+  },
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  mail: {
+    type: DataTypes.STRING(100)
+  }
+}, { timestamps: true });
+
 module.exports = {
   db: sequelize,
   Users,
   Messages,
   Conversations,
-  Void
+  Void,
+  Hatemail,
+  Mailbox
 };
