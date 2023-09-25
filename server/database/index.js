@@ -128,11 +128,99 @@ const News = sequelize.define('News', {
   }
 }, {timestamps: true});
 
+const Mailboxes = sequelize.define('Mailboxes', {
+  userOneId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  userTwoId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+}, {timestamps: true});
+
+const Hatemail = sequelize.define('Hatemail', {
+  senderId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  // senderName: {
+  //   type: DataTypes.TEXT,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: 'username'
+  //   }
+  // },
+  recipientId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  },
+  // recipientName: {
+  //   type: DataTypes.TEXT,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: 'username'
+  //   }
+  // },
+  conversationId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Mailboxes,
+      key: 'id'
+    }
+  },
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  mail: {
+    type: DataTypes.STRING(100)
+  }
+}, { timestamps: true });
+
+Hatemail.belongsTo(Users, {
+  foreignKey: 'senderId',
+  as: 'sender'
+});
+
+Hatemail.belongsTo(Users, {
+  foreignKey: 'recipientId',
+  as: 'recipient'
+});
 module.exports = {
   db: sequelize,
   Users,
   Messages,
   Conversations,
   Void,
-  News
+  News,
+  Hatemail,
+  Mailboxes
 };

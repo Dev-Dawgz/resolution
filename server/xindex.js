@@ -10,6 +10,7 @@ const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');
 const dmakerRouter = require('./routes/dmakerRouter'); //samson's route
 const homeRouter = require('./routes/homeRouter');
+const hatemailRouter = require('./routes/hatemailRouter');
 
 
 
@@ -45,6 +46,7 @@ app.use('/wofRoutes', wofRouter);
 app.use('/messagesHandling', messageRouter);
 app.use('/', homeRouter);
 app.use('/decisionmaker', dmakerRouter);
+app.use('/hatemail', hatemailRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {

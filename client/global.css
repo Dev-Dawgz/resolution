@@ -253,3 +253,47 @@ textarea {
     opacity: 0;
   }
 }
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 1in;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 2000;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mail-list {
+  position: absolute;
+  top: 3.2in; /* Adjust to match the top position of the centered container */
+  right: 0;
+  left: 0;
+  background-color: white;
+  z-index: 999; /* Adjust to be below the centered container */
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mail-item {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mail-item p {
+  margin: 0;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #888;
+}

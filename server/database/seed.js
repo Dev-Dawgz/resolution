@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-const { Users, Conversations, Messages, Void, News, db } = require('./index.js');
+const { Users, Conversations, Messages, Void, News, Hatemail, Mailboxes, db } = require('./index.js');
 
 db.options.logging = false;
 
@@ -18,6 +18,10 @@ const seedSqlize = () => {
     .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'Void\' table successfully created!'))
     .then(() => News.sync({ force: true }))
     .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'News\' table successfully created!'))
+    .then(() => Mailboxes.sync({ force: true }))
+    .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'Mailboxes\' table successfully created!'))
+    .then(() => Hatemail.sync({ force: true }))
+    .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'Hatemail\' table successfully created!'))
     .then(() => Promise.all(require('./fakeData.js').map((txn) => Users.create(txn))))
     .then((arr) => console.log('\x1b[32m', `\nDatabase (MySQL): Successfully seeded users with ${arr.length} entries!\n`, '\x1b[37m'))
     .then(process.exit);

@@ -13,6 +13,7 @@ import Controversy from './Controversy.jsx';
 //import Notification from "./Notifications.jsx";
 import { Flip, Bounce, Slice, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Hatemail from "./HateMailComponents/HateMail.jsx";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -95,7 +96,7 @@ const App = () => {
         setUser(response.data);
       }
     } catch (error) {
-      console.error(error);
+      console.error('cant get user or set auth user: ', error);
     }
   };
 
@@ -252,7 +253,7 @@ const App = () => {
             path="/DecisionMaker"
             element={<DecisionMaker changePoints={changePoints} user={user} />}
           />
-          <Route 
+          <Route
             path="/Whack"
             element={<Whack 
               loggedIn={user}
@@ -262,6 +263,11 @@ const App = () => {
             path="/Controversy"
             
             element={<Controversy user={user} />}
+
+          />
+          <Route
+            path="/hatemail"
+            element={<Hatemail user={user}/>}
           />
         </Route>
       </Routes>
