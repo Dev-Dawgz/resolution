@@ -10,7 +10,7 @@ const errorLoginUrl = `${process.env.HOST}/login/error`;
 
 router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: errorLoginUrl, successRedirect: successLoginUrl }), (req, res) => {
+router.get('/google/callback', passport.authenticate('google', { failureMessage: true, failureRedirect: errorLoginUrl, successRedirect: successLoginUrl }), (req, res) => {
   // Store the user ID in the session
   req.session.userId = req.user.id;
 
