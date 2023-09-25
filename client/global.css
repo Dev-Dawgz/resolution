@@ -190,6 +190,12 @@ textarea {
   resize: none;
   margin-top: 10px;
 }
+.link-muted { 
+  color: #aaa; 
+} 
+.link-muted:hover { 
+  color: #1266f1; 
+}
 
 
 /* ////Notification component */ 
