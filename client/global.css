@@ -255,23 +255,63 @@ textarea {
 }
 
 .centered-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: fixed;
-  top: 1in;
-  left: 0;
-  right: 0;
-  background-color: white;
+  top: 1.1in; /* Adjust the top value to move it down from the top of the page */
+  left: 1in;
+  right: 1in;
+  max-width: 90%; /* Adjust the maximum width as needed */
+  background-color: #ffffff;
   z-index: 2000;
   padding: 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.centered-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333; /* Adjust text color as needed */
+}
+
+.centered-container form {
+  text-align: left; /* Align form elements to the left */
+}
+
+.centered-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555; /* Adjust label text color as needed */
+}
+
+.centered-container select,
+.centered-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.centered-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.centered-container button:hover {
+  background-color: #0056b3; /* Adjust hover color as needed */
 }
 
 .mail-list {
   position: absolute;
-  top: 3.2in; /* Adjust to match the top position of the centered container */
+  top: 4.5in; /* Adjust to match the top position of the centered container */
   right: 0;
   left: 0;
   background-color: white;
