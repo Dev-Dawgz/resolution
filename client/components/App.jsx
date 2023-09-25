@@ -94,7 +94,7 @@ const App = () => {
         setUser(response.data);
       }
     } catch (error) {
-      console.error(error);
+      console.error('cant get user or set auth user: ', error);
     }
   };
 
@@ -249,7 +249,7 @@ const App = () => {
             path="/DecisionMaker"
             element={<DecisionMaker changePoints={changePoints} user={user} />}
           />
-          <Route 
+          <Route
             path="/Whack"
             element={<Whack changePoints={changePoints}/>}
           />
@@ -259,7 +259,7 @@ const App = () => {
           />
           <Route
             path="/hatemail"
-            element={<Hatemail />}
+            element={<Hatemail user={user}/>}
           />
         </Route>
       </Routes>

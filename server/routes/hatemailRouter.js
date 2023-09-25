@@ -1,6 +1,6 @@
 const express = require('express');
 const HatemailRouter = express.Router();
-const { Users, Hatemail, Mailbox } = require('../database/index');
+const { Users, Hatemail, Mailboxes } = require('../database/index');
 const { Op } = require("sequelize");
 
 
@@ -18,7 +18,7 @@ HatemailRouter.get('/api/recipients', (req, res) => {
     });
 });
 
-HatemailRouter.get('/user:username', (req, res) => {
+HatemailRouter.get('/api/user:username', (req, res) => {
   const { username } = req.params;
   Users.findOne({ where: { username }})
     // data will either be an object or null
@@ -35,9 +35,9 @@ HatemailRouter.get('/user:username', (req, res) => {
     });
 });
 
-HatemailRouter.get('/mailbox:userId', (req, res) => {
+HatemailRouter.get('/api/mailboxes:userId', (req, res) => {
   const { userId } = req.params;
-  Mailbox.findAll({
+  Mailboxes.findAll({
     where: {
       [Op.or]: [
         { userOneId: userId },
@@ -57,9 +57,14 @@ HatemailRouter.get('/mailbox:userId', (req, res) => {
     });
 });
 
-HatemailRouter.get('/hatemail:convoId', (req, res) => {
-  const {convoId} = req.params;
-  Hatemail.findAll({ where: { conversationId: convoId } })
+HatemailRouter.get('/api/hatemail:userId', (req, res) => {
+  const {userId} = req.params;
+  Hatemail.findAll({
+    where:
+    {
+      recipientId: userId
+    }
+  })
     .then((data) => {
       res.send(data.reverse());
     })
@@ -68,33 +73,43 @@ HatemailRouter.get('/hatemail:convoId', (req, res) => {
     });
 });
 
-HatemailRouter.post('/hatemail', (req, res) => {
-  const { senderId, recipientId, conversationId, mail } = req.body;
-  if (conversationId) {
-    Hatemail.create(req.body)
-      .then(() => {
-        res.sendStatus(201);
-      })
-      .catch((err) => {
-        console.log('error creating hatemail: ', err);
-        res.sendStatus(500);
-      });
-  } else {
-    Mailbox.create({userOneId: senderId, userTwoId: recipientId})
-      .then((data) => {
-        const { id } = data.dataValues;
-        return Hatemail.create({ senderId, recipientId, conversationId: id, mail: mail});
-      })
-      .then((data) => {
-        res.status(201);
-        res.send(data.dataValues);
-      })
-      .catch((err) => {
-        console.log('error creating hatemail: ', err);
-        res.sendStatus(500);
-      });
-  }
+HatemailRouter.post('/api/hatemail', async (req, res) => {
+  const { senderId, recipientId, mail } = req.body;
+  let conversationId;
+  Mailboxes.findOne({ where: {
+    $or: [
+      {
+        userOneId: senderId,
+        userTwoId: recipientId
+      },
+      {
+        userOneId: recipientId,
+        userTwoId: senderId
+      }
+    ]}})
+    .then((data) => {
+      conversationId = data.id;
+    })
+    .catch((err) => {
+      console.error('could not find conversationId: ', err);
+    });
+  try {
+    let hatemail;
 
+    if (conversationId) {
+      hatemail = await Hatemail.create(req.body);
+    } else {
+      const Mailbox = await Mailboxes.create({ userOneId: senderId, userTwoId: recipientId });
+      const { id: conversationId } = Mailbox.dataValues;
+
+      hatemail = await Hatemail.create({ senderId, recipientId, conversationId, mail });
+    }
+
+    res.status(201).json(hatemail);
+  } catch (err) {
+    console.error('Error creating hatemail:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 module.exports = HatemailRouter;

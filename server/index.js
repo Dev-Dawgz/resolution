@@ -6,7 +6,7 @@ const path = require('path');
 const passport = require('passport');
 const authRoutes = require('./routes/auth');
 const users = require('./routes/users');
-// passport starategy
+// passport strategy
 const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');
 const dmakerRouter = require('./routes/dmakerRouter'); //samson's route

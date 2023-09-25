@@ -112,7 +112,7 @@ const Void = sequelize.define('Void', {
   likes: DataTypes.INTEGER
 }, {timestamps: true});
 
-const Mailbox = sequelize.define('Mailbox', {
+const Mailboxes = sequelize.define('Mailboxes', {
   userOneId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -146,6 +146,14 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
+  // senderName: {
+  //   type: DataTypes.TEXT,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: 'username'
+  //   }
+  // },
   recipientId: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -154,11 +162,19 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
+  // recipientName: {
+  //   type: DataTypes.TEXT,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: 'username'
+  //   }
+  // },
   conversationId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Conversations,
+      model: Mailboxes,
       key: 'id'
     }
   },
@@ -173,6 +189,15 @@ const Hatemail = sequelize.define('Hatemail', {
   }
 }, { timestamps: true });
 
+Hatemail.belongsTo(Users, {
+  foreignKey: 'senderId',
+  as: 'sender'
+});
+
+Hatemail.belongsTo(Users, {
+  foreignKey: 'recipientId',
+  as: 'recipient'
+});
 module.exports = {
   db: sequelize,
   Users,
@@ -180,5 +205,5 @@ module.exports = {
   Conversations,
   Void,
   Hatemail,
-  Mailbox
+  Mailboxes
 };
