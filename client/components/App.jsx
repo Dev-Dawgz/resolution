@@ -254,11 +254,14 @@ const App = () => {
           />
           <Route 
             path="/Whack"
-            element={<Whack changePoints={changePoints}/>}
+            element={<Whack 
+              loggedIn={user}
+              changePoints={changePoints}/>}
           />
           <Route
             path="/Controversy"
-            element={<Controversy />}
+            
+            element={<Controversy user={user} />}
           />
         </Route>
       </Routes>

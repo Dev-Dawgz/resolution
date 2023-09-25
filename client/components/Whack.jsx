@@ -6,8 +6,10 @@ import Canvas from './Canvas.jsx';
 import io from 'socket.io-client';
 import Notification from "./Notifications.jsx";
 const socket = io();
+import ResolutionLogo from '../img/resolution_app_logo_mini.svg';
 
-const Whack = () => {
+
+const Whack = ({loggedIn}) => {
   const [searchInput, setSearchInput] = useState(''); // search input to search users
   const [user, setUser] = useState('...'); // set user (your opponent) state
   const [userPhoto, setUserPhoto] = useState(''); //set user photo src
@@ -26,6 +28,16 @@ const Whack = () => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        icon: (
+          <img
+            src={ResolutionLogo}
+            style={{
+              width: '32px',
+              height: '32px',
+              marginRight: '10px',
+            }}
+          />
+        ),
         progress: undefined,
         theme: "light",
         onClose: () => {
@@ -45,6 +57,16 @@ const Whack = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
+      icon: (
+        <img
+          src={ResolutionLogo}
+          style={{
+            width: '32px',
+            height: '32px',
+            marginRight: '10px',
+          }}
+        />
+      ),
     });
   };
   
@@ -55,8 +77,11 @@ const Whack = () => {
         setUserPhoto(response.data.picture);
         setUserId(response.data.id);
         setSearchInput('');
-        //toast whacked user 
-        //notifyWhackedUser(response.data.id); <= toast sent on search, removing but may add toast later
+        // //toast whacked user 
+        // if (loggedIn.id !== response.data.id) {
+        //   notifyWhackedUser();
+        // }
+        
       })
       .catch((err) => {
         console.error('error getting user:', err);
