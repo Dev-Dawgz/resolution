@@ -48,7 +48,7 @@ const Whack = ({loggedIn}) => {
   };
   //func to send toast to user who pinata was attacked 
   const notifyWhackedUser = (userId) => {
-    toast.success(`🤨 ${user} pulled up on your pinata!`, {
+    toast.warn(`🤨 ${user} pulled up on your pinata!`, {
       position: "top-right",
       autoClose: false,
       hideProgressBar: false,
@@ -95,7 +95,10 @@ const Whack = ({loggedIn}) => {
     notify(user)
       .then(() => {
         //then alert searched user
-        notifyWhackedUser();
+        setTimeout(() => {
+          notifyWhackedUser();
+        }, 2000);
+        
       });
   };
 
