@@ -120,6 +120,16 @@ const Navigation = () => {
                   Whack
                 </NavLink>
               </li>
+              <li className="nav-item" role="navigation">
+                <NavLink
+                  className="nav-link"
+                  href="#"
+                  to="/hatemail"
+                  onClick={handleCollapseNav}
+                >
+                  HateMail
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

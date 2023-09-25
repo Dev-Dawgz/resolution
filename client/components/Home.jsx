@@ -238,7 +238,7 @@ const Home = ({ user, changePoints }) => {
         <div className="controversy-intro">
           <h2 className="text-primary">
             <Link className="link" to="/Whack">
-            🪅 Whack
+            🏌🏾‍♂️ Whack
             </Link>
           </h2>
           <p>
@@ -249,7 +249,7 @@ const Home = ({ user, changePoints }) => {
         <div className="hatemail-intro">
           <h2 className="text-primary">
             <Link className="link" to="/hatemail">
-            Hatemail
+            ✉ HateMail
             </Link>
           </h2>
           <p>
