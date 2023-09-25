@@ -1,11 +1,35 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FcNews } from "react-icons/fc";
+import { toast } from 'react-toastify';
+import ResolutionLogo from '../img/resolution_app_logo_mini.svg';
 
 
-const Controversy = () => {
+
+const Controversy = ({user, loggedIn }) => {
   const [headline, setHeadline] = useState('');
 
+  // Function to show a toast when the component mounts
+  useEffect(() => {
+    if (user && user.username) {
+      toast.info(`${user.username}, let's get controversial!`, {
+        position: 'top-right',
+        autoClose: 5000,
+        icon: (
+          <img
+            src={ResolutionLogo}
+            alt='Resolution'
+            style={{
+              width: '32px',
+              height: '32px',
+              marginRight: '10px',
+            }}
+          />
+        ),
+      });
+    }
+  }, [user.username]);
+  
   const getHeadlines = () => {
     axios.get('/news/api')
       .then((newsStories) => {
@@ -18,7 +42,7 @@ const Controversy = () => {
         console.error('Could not retrieve newsStories array', err);
       });
   };
-  console.log(headline.title);// posting headline to page to the page
+  //console.log(headline.title);// posting headline to page to the page
 
 
 
@@ -38,7 +62,9 @@ const Controversy = () => {
             data-target="#collapseExample" 
             aria-expanded="false" 
             aria-controls="collapseExample" 
-            onClick={() => { getHeadlines(); }}>
+            onClick={() => {
+              getHeadlines(); 
+            }}>
               Grab A Headline
           </button>
         </div>
