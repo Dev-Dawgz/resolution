@@ -210,6 +210,17 @@ const Home = ({ user, changePoints }) => {
             Start some S#@!
           </p>
         </div>
+        <hr></hr>
+        <div className="controversy-intro">
+          <h2 className="text-primary">
+            <Link className="link" to="/Whack">
+            🪅 Whack
+            </Link>
+          </h2>
+          <p>
+            Take your anger out on whoever you are upset with
+          </p>
+        </div>
       </main>
     </div>
   );
