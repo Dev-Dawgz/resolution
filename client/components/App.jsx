@@ -10,7 +10,9 @@ import Messages from "./MessageComponents/Messages.jsx";
 import SignUp from "./SignUp.jsx";
 import Whack from "./Whack.jsx";
 import Controversy from './Controversy.jsx';
-import Notification from "./Notifications.jsx";
+//import Notification from "./Notifications.jsx";
+import { Flip, Bounce, Slice, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Hatemail from "./HateMailComponents/HateMail.jsx";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -217,9 +219,11 @@ const App = () => {
       });
     // window.location.reload(false);
   };
-
+  //ToastContainer used to alert users throughout application (see toast types in components for specific notifications)
   return (
     <BrowserRouter>
+      <ToastContainer
+        transition={Flip}/>
       <Routes>
         <Route
           index
@@ -251,11 +255,15 @@ const App = () => {
           />
           <Route
             path="/Whack"
-            element={<Whack changePoints={changePoints}/>}
+            element={<Whack 
+              loggedIn={user}
+              changePoints={changePoints}/>}
           />
           <Route
             path="/Controversy"
-            element={<Controversy />}
+            
+            element={<Controversy user={user} />}
+
           />
           <Route
             path="/hatemail"

@@ -1,16 +1,74 @@
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify'; //notification props
 import axios from 'axios';
 // import { setAuthUser } from './store/appSlice';
 import Canvas from './Canvas.jsx';
 import io from 'socket.io-client';
 import Notification from "./Notifications.jsx";
 const socket = io();
+import ResolutionLogo from '../img/resolution_app_logo_mini.svg';
 
-const Whack = () => {
+
+const Whack = ({loggedIn}) => {
   const [searchInput, setSearchInput] = useState(''); // search input to search users
   const [user, setUser] = useState('...'); // set user (your opponent) state
   const [userPhoto, setUserPhoto] = useState(''); //set user photo src
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState();
+
+  //function to handle toast/notification onClick/Whack
+  //promise added to make toast async with whack toast success
+  const notify = (userId) => {
+    return new Promise((resolve) => {
+      //toast.warn used to give 'warning' notification message to user on Piñata whack
+      toast.info(`🦄 Assault recorded, ${userId} notified`, {//using .info until fully styled
+      //props on toast object to style/modify
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        icon: (
+          <img
+            src={ResolutionLogo}
+            style={{
+              width: '32px',
+              height: '32px',
+              marginRight: '10px',
+            }}
+          />
+        ),
+        progress: undefined,
+        theme: "light",
+        onClose: () => {
+          resolve();
+        }
+      });
+    });
+  };
+  //func to send toast to user who pinata was attacked 
+  const notifyWhackedUser = (userId) => {
+    toast.success(`🤨 ${user} pulled up on your pinata!`, {
+      position: "top-right",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      icon: (
+        <img
+          src={ResolutionLogo}
+          style={{
+            width: '32px',
+            height: '32px',
+            marginRight: '10px',
+          }}
+        />
+      ),
+    });
+  };
   
   const getUser = () => {
     axios.get(`/users/search/${searchInput}`)
@@ -19,6 +77,11 @@ const Whack = () => {
         setUserPhoto(response.data.picture);
         setUserId(response.data.id);
         setSearchInput('');
+        // //toast whacked user 
+        // if (loggedIn.id !== response.data.id) {
+        //   notifyWhackedUser();
+        // }
+        
       })
       .catch((err) => {
         console.error('error getting user:', err);
@@ -26,10 +89,16 @@ const Whack = () => {
       });
   };
   
+ //updated handle whack to pass in user and then notify of once whacked
   const handleWhack = () => {
-    socket.emit('test_notify');
+    //whacker toast to alert assault event
+    notify(user)
+      .then(() => {
+        //then alert searched user
+        notifyWhackedUser();
+      });
   };
-  
+
   // value to search username
   const handleChange = (e) => {
     e.preventDefault();
@@ -52,8 +121,6 @@ const Whack = () => {
           }
         }}
         value={searchInput}/>
-
-      <Notification userId={userId}/>
       <button className='btn btn-primary'
         type="button"
         onClick={getUser}
@@ -63,6 +130,7 @@ const Whack = () => {
         <button className='btn btn-primary'
           onClick={handleWhack}
         >Whack'em!</button>
+       
       </div>
       <Canvas userPhoto={userPhoto}/>
     </div>

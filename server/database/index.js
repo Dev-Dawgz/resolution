@@ -112,6 +112,22 @@ const Void = sequelize.define('Void', {
   likes: DataTypes.INTEGER
 }, {timestamps: true});
 
+const News = sequelize.define('News', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  headline: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    }
+  }
+}, {timestamps: true});
+
 const Mailboxes = sequelize.define('Mailboxes', {
   userOneId: {
     type: DataTypes.INTEGER,
@@ -204,6 +220,7 @@ module.exports = {
   Messages,
   Conversations,
   Void,
+  News,
   Hatemail,
   Mailboxes
 };

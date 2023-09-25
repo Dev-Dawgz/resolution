@@ -11,6 +11,7 @@ const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');
 const dmakerRouter = require('./routes/dmakerRouter'); //samson's route
 const homeRouter = require('./routes/homeRouter');
+const newsRouter = require('./routes/newsRoute');
 const hatemailRouter = require('./routes/hatemailRouter');
 
 
@@ -46,6 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
+app.use('/news', newsRouter);
 app.use('/users', users);
 app.use('/auth', authRoutes);
 app.use('/wofRoutes', wofRouter);

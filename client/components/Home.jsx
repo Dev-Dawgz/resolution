@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Void from "./Void.jsx";
+import { toast } from 'react-toastify';
+import ResolutionLogo from '../img/resolution_app_logo_mini.svg';
+
 
 const Home = ({ user, changePoints }) => {
 
@@ -70,6 +73,27 @@ const Home = ({ user, changePoints }) => {
   const handleVoidToggle = () => {
     setToggleOff(!toggleOff);
   };
+
+  // Display a welcome toast when the component mounts
+  useEffect(() => {
+    if (user && user.username) {
+      toast.info(`Welcome to Resolution, ${user.username}!`, {
+        position: 'top-right',
+        autoClose: 5000,
+        icon: (
+          <img
+            src={ResolutionLogo}
+            style={{
+              width: '32px',
+              height: '32px',
+              marginRight: '10px',
+            }}
+          />
+        ),
+      }
+      );
+    }
+  }, [user.username]);
 
   return (
     <div className="home section">
@@ -208,6 +232,17 @@ const Home = ({ user, changePoints }) => {
           </h2>
           <p>
             Start some S#@!
+          </p>
+        </div>
+        <hr></hr>
+        <div className="controversy-intro">
+          <h2 className="text-primary">
+            <Link className="link" to="/Whack">
+            🪅 Whack
+            </Link>
+          </h2>
+          <p>
+            Take your anger out on whoever you are upset with
           </p>
         </div>
         <hr></hr>
