@@ -22,9 +22,12 @@ Finally, earn points and trophies as you become a master conflict resolver! Our 
 
 **Whack** - Take your anger out on whoever you are mad at! Search for your Enemy to get a personalized Piñata of them and give them as many Whacks as you want, they will get a notification every time you do! 
 
-**Notification System** - Used to alert users on welcome, when feeling controversial, and when whacking users piñata.
+**Notification System** - Used to alert users on welcome, when feeling controversial, and when whacking user's piñata.
 
+**Hatemail** - Did your mother ever tell you "if you don't have anything nice to say, don't say anything at all", well Hatemail is'nt for your mother.
+Hatemail allows you to tell your friends, enemies, and everyone in between, exactly how you feel. Just open the dropdown menu for a convenient list of every user, input your message, and send it their way! Any time a user navigates to the Hatemail tab, they will be greeted with a list of any Hatemail they've received. 
 
+**Controversy** - Did you have something to say? Speak on it! You are able to give your opinion or reply to a given controversial headline. 
 
 # Developers
 
@@ -57,7 +60,10 @@ For deployment, HOST will be the instance address and not 127.0.0.1
 * In Meme Messenger, if a user types either top or bottom text and the API/page doesn't update before clicking send, the other images will not display.
 * If a user deletes his/her profile, the user is redirected back to the login page. To login again, the server must be restarted.
 * When searching for an enemy on the Piñata, if you search for a second enemy the image goes back and forth between the two images that were set in state.
-*When whacking others, the promise notification resolves to notifying current users.
+* When whacking others, the promise notification resolves to notifying current users.
+* Reloading the page within the Hatemail page sometimes logs the user out, requiring them to sign in with google again before getting any requests from the database
+* Infrequently (maybe 1/20 times) the hatemail component will fail to render, errors denote this behavior in the console, from the user's perspective the page will just fail to load. reloading the page will not work, and will log the user out every time. The solution is to log out and back in.
+* Comments within the controversy page are static data, unconnected to any DB
 
 # Tech Stack
 
