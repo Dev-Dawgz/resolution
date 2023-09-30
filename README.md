@@ -3,16 +3,27 @@
 Are you fighting with a friend? Clashing with a coworker? Battling with your bro?
 
 Welcome to Resolution! This innovative app will change the way you resolve interpersonal conflict. Resolution offers multiple features for all of your conflict resolution needs. This app is a medium for you to express your emotions, communicate with others in a low pressure environment, and make decisions about how to move forward. Utilizing all that resolution has to offer will improve your relationships with others and your quality of life overall.
+Legacy update: The app now allows you to create conflict in fun interactive ways.
 
-Within Resolution, there are three primary approaches to handling interpersonal conflict:
+Within Resolution, there are three primary approaches to handling interpersonal conflict.
+
+Legacy update: three approaches to creating conflict.
+
 
 **Scream Into The Void** – Do you need to vent? Often, this might be the first constructive way to deal with your conflict. Put words to your emotions, say your piece and get everything off your chest. The intro to our site is a live feed of user’s screams. These screams are anonymous. This feature of resolution helps users process their emotions, without any worry of judgment or consequence. User’s can find commiseration with other anonymous screams, or post screams of their own.
 
 **Meme Style Communications** – Do you have something you need to say, but just can’t find the right way to say it? We offer a convenient and expressive meme generator to help communicate your feelings to others in a light-hearted way. It might be tough to say what needs to be said; why not break the ice with a meme. 
 
-**Decision Maker** – Are you ready to move forward with your conflict, but need an unbiased way to decide how? Our decision maker feature offers a fair, neutral answer. Through a game of rock, paper, scissors, you and your opponent will be able to come to a concrete decision. 
+**Decision Maker** – Are you ready to move forward with your conflict, but need an unbiased way to decide how? Our decision maker feature offers a fair, neutral answer. Through a game of rock, paper, scissors, you and your opponent will be able to come to a concrete decision.
 
 Finally, earn points and trophies as you become a master conflict resolver! Our top 10 Resolution users will be featured on the Wall of Fame.
+
+**Legacy update**: 
+
+**Whack** - Take your anger out on whoever you are mad at! Search for your Enemy to get a personalized Piñata of them and give them as many Whacks as you want, they will get a notification every time you do! 
+
+**Notification System** - Used to alert users on welcome, when feeling controversial, and when whacking users piñata.
+
 
 
 # Developers
@@ -24,6 +35,7 @@ NODE_ENV=development
 HOST=http://127.0.0.1:4000  
 GOOGLE_CLIENT_ID=(your own client ID)  
 GOOGLE_CLIENT_SECRET=(your own client secret)  
+MEDIASTACK_API_KEY=(your key from mediaStack)
 ```
 Tip-- Some may need to add quotes to their variable definitions; ex: ```NODE_ENV="development"```
 For deployment, HOST will be the instance address and not 127.0.0.1
@@ -44,7 +56,8 @@ For deployment, HOST will be the instance address and not 127.0.0.1
 * If a user enters a room in rock, paper, scissors, and then navigates to another page before finishing a game, the user is still in that room until the user refreshes the page or logs out.
 * In Meme Messenger, if a user types either top or bottom text and the API/page doesn't update before clicking send, the other images will not display.
 * If a user deletes his/her profile, the user is redirected back to the login page. To login again, the server must be restarted.
-
+* When searching for an enemy on the Piñata, if you search for a second enemy the image goes back and forth between the two images that were set in state.
+*When whacking others, the promise notification resolves to notifying current users.
 
 # Tech Stack
 
@@ -61,6 +74,10 @@ For deployment, HOST will be the instance address and not 127.0.0.1
 - Webpack
 - DayJS
 - API: https://apimeme.com/
+- API: https://mediastack.com/signup
+- React-Toastify
+- React-Canvas
+
 
 # Contributors
 Thanks to all the following people for contributing to this project:
@@ -69,6 +86,10 @@ Thanks to all the following people for contributing to this project:
 [@BenjaminKlein](https://github.com/Benjaminklein99)
 [@SamsonThai](https://github.com/skanda108)
 [@JackieWisdom](https://github.com/wisdomjackie)
+[@NasthiaVillavicencio] (https://github.com/nasthia861)
+[@DarrylMcdonald] (https://github.com/ddmcdona06)
+[@DejuanEllswworth] (https://github.com/yeauxdejuan)
+[@LoganYoung] (https://github.com/lyoun318)
 
 
 # Contact Info
