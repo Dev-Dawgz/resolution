@@ -138,6 +138,11 @@ const Messages = sequelize.define('Messages', {
   },
   img: {
     type: DataTypes.STRING(100)
+  },
+  isPositive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 }, { timestamps: true });
 
@@ -208,14 +213,6 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
-  // senderName: {
-  //   type: DataTypes.TEXT,
-  //   allowNull: false,
-  //   references: {
-  //     model: Users,
-  //     key: 'username'
-  //   }
-  // },
   recipientId: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -224,14 +221,6 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
-  // recipientName: {
-  //   type: DataTypes.TEXT,
-  //   allowNull: false,
-  //   references: {
-  //     model: Users,
-  //     key: 'username'
-  //   }
-  // },
   conversationId: {
     type: DataTypes.INTEGER,
     allowNull: false,
