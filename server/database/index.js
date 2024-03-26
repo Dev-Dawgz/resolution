@@ -23,6 +23,11 @@ const Users = sequelize.define('Users', {
     defaultValue: 0,
     allowNull: false
   },
+  balance: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    allowNull: false
+  },
   trophy: {
     type: DataTypes.STRING(100),
     defaultValue: 'Earn some points!',
@@ -33,6 +38,47 @@ const Users = sequelize.define('Users', {
   googleId: DataTypes.STRING(100),
   status: DataTypes.STRING(100)
 }, { timestamps: true });
+
+const Rewards = sequelize.define('Rewards', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  reward: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  img: {
+    type: DataTypes.STRING(100)
+  }
+}, {timestamps: true});
+
+const UsersRewards = sequelize.define('UsersRewards', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  rewardId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Rewards,
+      key: 'id'
+    }
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  }
+});
 
 const Conversations = sequelize.define('Conversations', {
   userOneId: {
@@ -222,5 +268,7 @@ module.exports = {
   Void,
   News,
   Hatemail,
-  Mailboxes
+  Mailboxes,
+  Rewards,
+  UsersRewards,
 };
