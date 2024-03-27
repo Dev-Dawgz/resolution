@@ -46,12 +46,20 @@ const Rewards = sequelize.define('Rewards', {
     autoIncrement: true,
     primaryKey: true
   },
-  reward: {
+  stickerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  keyword: {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  img: {
+  stickerImg: {
     type: DataTypes.STRING(100)
+  },
+  price: {
+    type: DataTypes.STRING(100),
+    allowNull: false
   }
 }, {timestamps: true});
 
