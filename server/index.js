@@ -9,6 +9,7 @@ const users = require('./routes/users');
 // passport strategy
 const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');
+const rewardsRouter = require('./routes/rewardsRouter.js');
 const dmakerRouter = require('./routes/dmakerRouter'); //samson's route
 const homeRouter = require('./routes/homeRouter');
 const newsRouter = require('./routes/newsRoute');
@@ -51,6 +52,7 @@ app.use('/news', newsRouter);
 app.use('/users', users);
 app.use('/auth', authRoutes);
 app.use('/wofRoutes', wofRouter);
+app.use('/rewards', rewardsRouter);
 app.use('/messagesHandling', messageRouter);
 app.use('/hatemail', hatemailRouter);
 // serve the uploads folder as a static directory
