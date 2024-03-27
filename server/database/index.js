@@ -48,7 +48,8 @@ const Rewards = sequelize.define('Rewards', {
   },
   stickerId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   keyword: {
     type: DataTypes.STRING(100),
