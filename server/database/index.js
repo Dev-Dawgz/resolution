@@ -56,7 +56,12 @@ const Rewards = sequelize.define('Rewards', {
     allowNull: false
   },
   stickerImg: {
-    type: DataTypes.STRING(100)
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  stickerImg_96: {
+    type: DataTypes.STRING(100),
+    allowNull: false
   },
   price: {
     type: DataTypes.STRING(100),

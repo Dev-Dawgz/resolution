@@ -11,7 +11,7 @@ rewardsRouter.get('/seed', (req, res) => {
       // console.log(stickerArray);
       // res.send(stickerArray);
       // lol way too many values come from the api to throw it directly into the model
-      return Rewards.bulkCreate(stickerArray, { fields: ['stickerId', 'keyword', 'stickerImg', 'price'] });
+      return Rewards.bulkCreate(stickerArray, { fields: ['stickerId', 'keyword', 'stickerImg', 'stickerImg_96', 'price'] });
     })
     .then((response) => {
       // console.log(response);

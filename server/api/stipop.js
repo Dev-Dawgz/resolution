@@ -4,7 +4,7 @@ require('dotenv').config();
 const getStickers = () => {
   const { STIPOP_USER_ID, STIPOP_API_KEY } = process.env;
   const stipopUrl = `https://messenger.stipop.io/v1/search?userId=${STIPOP_USER_ID}&lang="en"&countryCode="US"&limit=10`;
-  return axios.get(stipopUrl, { headers: {"apikey": "b2b4f2a4aa146ce392ea425ceee82994"} })
+  return axios.get(stipopUrl, { headers: {"apikey": STIPOP_API_KEY} })
     .then((response) => {
       // console.log(response.data.body.stickerList);
       return response.data.body.stickerList;
