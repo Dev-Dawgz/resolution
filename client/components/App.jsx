@@ -215,6 +215,16 @@ const App = () => {
       // and set that to points
       points: newPoints
     })
+      .then(() => {
+        return axios.get(`users/${user.id}`);
+      })
+      .then(({ data }) => {
+        const newPoints = data.balance + num;
+        return axios.patch('rewards/balance', {
+          balance: newPoints,
+          id: user.id
+        });
+      })
       .catch((err) => {
         console.error("Failed axios PATCH: ", err);
       });
