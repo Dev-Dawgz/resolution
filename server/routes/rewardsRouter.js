@@ -1,7 +1,7 @@
 const express = require('express');
 const rewardsRouter = express.Router();
 
-const { Rewards } = require('../database/index');
+const { Rewards, Users } = require('../database/index');
 const { getStickers } = require('../api/stipop');
 
 // this route is called in the seed
@@ -27,6 +27,17 @@ rewardsRouter.get('/', (req, res) => {
     .catch((err) => {
       console.error('failed getting rewards', err);
       res.sendStatus(500);
+    });
+});
+
+rewardsRouter.patch('/balance', (req, res) => {
+  const { balance, id } = req.body;
+  console.log(balance, id);
+  Users.update({ balance }, { where: { id }})
+    .then(res.sendStatus(200))
+    .catch((err) => {
+      console.log('failed updating user', err);
+      sendStatus(500);
     });
 });
 
