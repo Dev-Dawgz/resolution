@@ -39,6 +39,8 @@ const RewardsStore = (props) => {
   return (
     <div className="wof-component container">
       <h1 className="text-primary">Rewards Store</h1>
+      <h2>Already Purchased</h2>
+      <h2>Browse More</h2>
       <Container>
         <Row>
           {

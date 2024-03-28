@@ -96,6 +96,16 @@ const UsersRewards = sequelize.define('UsersRewards', {
   }
 });
 
+UsersRewards.belongsTo(Rewards, {
+  foreignKey: 'rewardId',
+  as: 'reward'
+});
+
+UsersRewards.belongsTo(Users, {
+  foreignKey: 'userId',
+  as: 'user'
+});
+
 const Conversations = sequelize.define('Conversations', {
   userOneId: {
     type: DataTypes.INTEGER,

@@ -30,15 +30,30 @@ rewardsRouter.get('/', (req, res) => {
     });
 });
 
+rewardsRouter.get('/:userId', (req, res) => {
+  const { userId } = req.params;
+  console.log(userId);
+  UsersRewards.findAll({
+    where: { userId },
+    include: [{ model: Rewards, as: 'reward' }]
+  })
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      console.error('failed getting users rewards', err);
+      res.sendStatus(500);
+    });
+
+});
+
 const updateUserBalance = (balance, id) => {
-  return Users.update({ balance }, { where: { id }});
+  return Users.update({ balance }, { where: { id } });
 };
 
 rewardsRouter.patch('/balance', (req, res) => {
   const { balance, id } = req.body;
-  console.log(balance, id);
   updateUserBalance(balance, id)
-  // Users.update({ balance }, { where: { id }})
     .then(res.sendStatus(200))
     .catch((err) => {
       console.error('failed updating user', err);
@@ -47,7 +62,6 @@ rewardsRouter.patch('/balance', (req, res) => {
 });
 
 rewardsRouter.post('/purchase', (req, res) => {
-  // console.log(req.body);
   const { cost, balance, rewardId, userId } = req.body;
   UsersRewards.create({ rewardId, userId })
     .then(() => {
