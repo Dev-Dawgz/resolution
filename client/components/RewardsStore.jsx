@@ -6,15 +6,21 @@ import Row from 'react-bootstrap/Row';
 
 import RewardItem from './RewardsComponents/RewardItem.jsx';
 
-const RewardsStore = ({ user }) => {
+const RewardsStore = (props) => {
   const [rewards, setRewards] = useState([]);
+
+  const [user, setUser] = useState(props.user);
 
   const purchaseReward = (cost, rewardId) => {
     console.log(cost, user.balance, rewardId, user.id);
     if (user.balance >= cost) {
       axios.post('/rewards/purchase', {
         cost, balance: user.balance, rewardId, userId: user.id
-      });
+      })
+        .then(({ data }) => {
+          console.log(data);
+          setUser(data);
+        });
     } else {
       // need to display this to user
       console.log('not enough points!');

@@ -54,7 +54,10 @@ rewardsRouter.post('/purchase', (req, res) => {
       return updateUserBalance(balance - cost, userId);
     })
     .then(() => {
-      res.sendStatus(201);
+      return Users.findByPk(userId);
+    })
+    .then((response) => {
+      res.send(response);
     })
     .catch((err) => {
       console.error('failed purchasing rewards', err);
