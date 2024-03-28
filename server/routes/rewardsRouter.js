@@ -4,17 +4,13 @@ const rewardsRouter = express.Router();
 const { Rewards } = require('../database/index');
 const { getStickers } = require('../api/stipop');
 
-// this route may end up being more of a seed func
+// this route is called in the seed
 rewardsRouter.get('/seed', (req, res) => {
   getStickers()
     .then((stickerArray) => {
-      // console.log(stickerArray);
-      // res.send(stickerArray);
-      // lol way too many values come from the api to throw it directly into the model
       return Rewards.bulkCreate(stickerArray, { fields: ['stickerId', 'keyword', 'stickerImg', 'stickerImg_96', 'price'] });
     })
     .then((response) => {
-      // console.log(response);
       res.send(response);
     })
     .catch((err) => {

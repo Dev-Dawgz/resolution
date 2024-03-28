@@ -252,7 +252,7 @@ const App = () => {
             element={<WallOfFame changePoints={changePoints} />} />
           <Route
             path="/RewardsStore"
-            element={<RewardsStore />}
+            element={<RewardsStore user={user} />}
           />
           <Route
             path="/DecisionMaker"
