@@ -12,7 +12,7 @@ const RewardsStore = () => {
   useEffect(() => {
     axios.get('/rewards')
       .then(({data}) => {
-        console.log(data);
+        // console.log(data);
         setRewards(data);
       })
       .catch((err) => console.error('failed getting rewards'));

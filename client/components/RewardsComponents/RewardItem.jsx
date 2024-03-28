@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
 const RewardItem = ({reward}) => {
-  const { stickerImg_96, price } = reward;
+  const { stickerImg, price } = reward;
 
   let cost;
   switch (price) {
@@ -22,7 +22,7 @@ const RewardItem = ({reward}) => {
   return (
     <Col>
       {cost}
-      <Image src={stickerImg_96} />
+      <Image src={stickerImg} />
     </Col>
   );
 };
