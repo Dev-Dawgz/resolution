@@ -2,9 +2,10 @@ import React from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
-const RewardItem = ({reward}) => {
-  const { stickerImg, price } = reward;
+const RewardItem = ({reward, purchaseReward}) => {
+  const { stickerImg, price, id } = reward;
 
   let cost;
   switch (price) {
@@ -23,6 +24,7 @@ const RewardItem = ({reward}) => {
     <Col>
       {cost}
       <Image src={stickerImg} />
+      <Button onClick={() => purchaseReward(cost, id)}>Buy!</Button>
     </Col>
   );
 };
