@@ -1,5 +1,4 @@
 const axios = require('axios');
-require('dotenv').config();
 
 const getStickers = () => {
   const { STIPOP_USER_ID, STIPOP_API_KEY } = process.env;
