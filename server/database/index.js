@@ -57,6 +57,11 @@ const Conversations = sequelize.define('Conversations', {
     autoIncrement: true,
     primaryKey: true
   },
+  isPositive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  }
 }, {timestamps: true});
 
 const Messages = sequelize.define('Messages', {
@@ -126,6 +131,40 @@ const News = sequelize.define('News', {
       notEmpty: true,
     }
   }
+}, {timestamps: true});
+
+//new conflicts model
+const OverviewConflicts = sequelize.define('OverviewConflicts', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  conflictType: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }, 
+  conflictStatus: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }, 
+  memeCount: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }, 
+  positiveOrNegativeMeme: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }, 
+  decisionCount: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }, 
+  decisionWinner: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }, 
 }, {timestamps: true});
 
 const Mailboxes = sequelize.define('Mailboxes', {
@@ -222,5 +261,6 @@ module.exports = {
   Void,
   News,
   Hatemail,
-  Mailboxes
+  Mailboxes,
+  OverviewConflicts
 };

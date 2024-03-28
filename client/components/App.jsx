@@ -8,6 +8,7 @@ import Navigation from "./Navigation.jsx";
 import axios from "axios";
 import Messages from "./MessageComponents/Messages.jsx";
 import SignUp from "./SignUp.jsx";
+import Overview from "./Overview.jsx";
 import Whack from "./Whack.jsx";
 import Controversy from './Controversy.jsx';
 //import Notification from "./Notifications.jsx";
@@ -258,6 +259,10 @@ const App = () => {
             element={<Whack 
               loggedIn={user}
               changePoints={changePoints}/>}
+          />
+          <Route
+            path="/Overview"
+            element={<Overview />}
           />
           <Route
             path="/Controversy"
