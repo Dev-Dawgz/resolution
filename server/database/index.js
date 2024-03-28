@@ -23,6 +23,11 @@ const Users = sequelize.define('Users', {
     defaultValue: 0,
     allowNull: false
   },
+  balance: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    allowNull: false
+  },
   trophy: {
     type: DataTypes.STRING(100),
     defaultValue: 'Earn some points!',
@@ -33,6 +38,61 @@ const Users = sequelize.define('Users', {
   googleId: DataTypes.STRING(100),
   status: DataTypes.STRING(100)
 }, { timestamps: true });
+
+const Rewards = sequelize.define('Rewards', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  stickerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    unique: true
+  },
+  keyword: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  stickerImg: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  stickerImg_96: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  price: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  }
+}, {timestamps: true});
+
+const UsersRewards = sequelize.define('UsersRewards', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  rewardId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Rewards,
+      key: 'id'
+    }
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    }
+  }
+});
 
 const Conversations = sequelize.define('Conversations', {
   userOneId: {
@@ -97,6 +157,11 @@ const Messages = sequelize.define('Messages', {
   },
   img: {
     type: DataTypes.STRING(100)
+  },
+  isPositive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 }, { timestamps: true });
 
@@ -143,27 +208,21 @@ const OverviewConflicts = sequelize.define('OverviewConflicts', {
   },
   conflictType: {
     type: DataTypes.STRING,
-    allowNull: false,
   }, 
   conflictStatus: {
     type: DataTypes.STRING,
-    allowNull: false,
   }, 
   memeCount: {
     type: DataTypes.INTEGER,
-    allowNull: false,
   }, 
   positiveOrNegativeMeme: {
     type: DataTypes.STRING,
-    allowNull: false,
   }, 
   decisionCount: {
     type: DataTypes.INTEGER,
-    allowNull: false,
   }, 
   decisionWinner: {
     type: DataTypes.INTEGER,
-    allowNull: false,
   }, 
 }, {timestamps: true});
 
@@ -201,14 +260,6 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
-  // senderName: {
-  //   type: DataTypes.TEXT,
-  //   allowNull: false,
-  //   references: {
-  //     model: Users,
-  //     key: 'username'
-  //   }
-  // },
   recipientId: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -217,14 +268,6 @@ const Hatemail = sequelize.define('Hatemail', {
       key: 'id'
     }
   },
-  // recipientName: {
-  //   type: DataTypes.TEXT,
-  //   allowNull: false,
-  //   references: {
-  //     model: Users,
-  //     key: 'username'
-  //   }
-  // },
   conversationId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -262,5 +305,7 @@ module.exports = {
   News,
   Hatemail,
   Mailboxes,
-  OverviewConflicts
+  OverviewConflicts,
+  Rewards,
+  UsersRewards
 };

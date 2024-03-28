@@ -94,6 +94,16 @@ const Navigation = () => {
                 <NavLink
                   className="nav-link"
                   href="#"
+                  to="/RewardsStore"
+                  onClick={handleCollapseNav}
+                >
+                  Rewards Store
+                </NavLink>
+              </li>
+              <li className="nav-item" role="navigation">
+                <NavLink
+                  className="nav-link"
+                  href="#"
                   to="/Controversy"
                   onClick={handleCollapseNav}
                 >

@@ -78,6 +78,7 @@ textarea {
 }
 
 /* //// WOF COMPONENT */
+/*  .wof-component, .pinata, and .con-component are the exact same styling */
 .wof-component {
   margin-top: 8em;
   display: flex;
@@ -165,6 +166,7 @@ textarea {
   flex-direction: column;
 }
 
+/* this was already declared in the WOF component section
 .wof-header-container {
   display: flex;
   flex-direction: row;
@@ -177,7 +179,8 @@ textarea {
   height: auto;
   padding: 10px 10px 50px 30px;
   margin-right: 2em;
-}
+} */
+
 .cont-box {
   width: 100%;
   height: 150px;
