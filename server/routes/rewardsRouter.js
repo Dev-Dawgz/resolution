@@ -38,7 +38,9 @@ rewardsRouter.get('/:userId', (req, res) => {
     include: [{ model: Rewards, as: 'reward' }]
   })
     .then((response) => {
-      res.send(response);
+      // we don't need the regular usersrewards data, just the reward for the rewardId
+      const rewards = response.map((row) => row.reward);
+      res.send(rewards);
     })
     .catch((err) => {
       console.error('failed getting users rewards', err);

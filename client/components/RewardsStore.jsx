@@ -5,11 +5,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import RewardItem from './RewardsComponents/RewardItem.jsx';
+import PurchasedItem from './RewardsComponents/PurchasedItem.jsx';
 
 const RewardsStore = (props) => {
   const [rewards, setRewards] = useState([]);
 
   const [user, setUser] = useState(props.user);
+
+  const [purchased, setPurchased] = useState([]);
 
   const purchaseReward = (cost, rewardId) => {
     console.log(cost, user.balance, rewardId, user.id);
@@ -18,7 +21,7 @@ const RewardsStore = (props) => {
         cost, balance: user.balance, rewardId, userId: user.id
       })
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           setUser(data);
         });
     } else {
@@ -28,10 +31,22 @@ const RewardsStore = (props) => {
   };
 
   useEffect(() => {
+    axios.get(`/rewards/${user.id}`)
+      .then(({ data }) => {
+        setPurchased(data);
+      })
+      .catch((err) => console.error('failed updating purchases', err));
+  }, [user]);
+
+  useEffect(() => {
     axios.get('/rewards')
       .then(({data}) => {
         // console.log(data);
         setRewards(data);
+        return axios.get(`/rewards/${user.id}`);
+      })
+      .then(({ data }) => {
+        setPurchased(data);
       })
       .catch((err) => console.error('failed getting rewards'));
   }, []);
@@ -40,6 +55,13 @@ const RewardsStore = (props) => {
     <div className="wof-component container">
       <h1 className="text-primary">Rewards Store</h1>
       <h2>Already Purchased</h2>
+      <Container>
+        <Row>
+          {
+            purchased.map((reward) => <PurchasedItem key={`purchased-${reward.stickerId}`} reward={reward}/>)
+          }
+        </Row>
+      </Container>
       <h2>Browse More</h2>
       <Container>
         <Row>
