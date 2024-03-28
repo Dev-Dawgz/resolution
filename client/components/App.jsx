@@ -4,6 +4,7 @@ import DecisionMaker from "./DecisionMaker.jsx";
 import Home from "./Home.jsx";
 import UserProfile from "./UserProfile.jsx";
 import WallOfFame from "./WallOfFame.jsx";
+import RewardsStore from './RewardsStore.jsx';
 import Navigation from "./Navigation.jsx";
 import axios from "axios";
 import Messages from "./MessageComponents/Messages.jsx";
@@ -249,6 +250,10 @@ const App = () => {
           <Route
             path="/WallOfFame"
             element={<WallOfFame changePoints={changePoints} />} />
+          <Route
+            path="/RewardsStore"
+            element={<RewardsStore user={user} />}
+          />
           <Route
             path="/DecisionMaker"
             element={<DecisionMaker changePoints={changePoints} user={user} />}
