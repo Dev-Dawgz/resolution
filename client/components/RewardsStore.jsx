@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Badge from 'react-bootstrap/Badge';
 
 import RewardItem from './RewardsComponents/RewardItem.jsx';
 import PurchasedItem from './RewardsComponents/PurchasedItem.jsx';
@@ -54,6 +55,7 @@ const RewardsStore = (props) => {
   return (
     <div className="wof-component container">
       <h1 className="text-primary">Rewards Store</h1>
+      <Badge style={{width: 200}} bg="info">Balance: {user.balance} points</Badge>
       <h2>Already Purchased</h2>
       <Container>
         <Row>

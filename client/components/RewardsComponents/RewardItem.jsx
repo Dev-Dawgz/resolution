@@ -2,12 +2,15 @@ import React from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Overlay from 'react-bootstrap/Overlay';
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 import BuyButton from './BuyButton.jsx';
 import DisabledBuy from './DisabledBuy.jsx';
 
 const RewardItem = ({reward, purchaseReward, user}) => {
-  const { stickerImg, price, id } = reward;
+  const { stickerImg, price, id, keyword } = reward;
   const { balance} = user;
 
   let cost;
@@ -34,11 +37,17 @@ const RewardItem = ({reward, purchaseReward, user}) => {
 
   return (
     <Col>
-      {cost}
+      {/* {cost}
       <Image src={stickerImg} />
-      {buttonPicker()}
-      {/* <BuyButton purchaseReward={purchaseReward} cost={cost} id={id} /> */}
-      {/* <Button onClick={() => purchaseReward(cost, id)}>Buy!</Button> */}
+      {buttonPicker()} */}
+      <Card>
+        <Card.Img style={{"width": 200}} src={stickerImg} alt={keyword} />
+        <Card.ImgOverlay>
+          {/* <Card.Title>{cost}</Card.Title> */}
+          <Badge bg="info">{cost} points</Badge>
+          {buttonPicker()}
+        </Card.ImgOverlay>
+      </Card>
     </Col>
   );
 };
