@@ -21,6 +21,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ".././global.css";
 import { useDispatch } from "react-redux";
 import { setAuthUser, setIsAuthenticated } from "./store/appSlice.js";
+import MoodNotes from "./MoodNotes.jsx";
 
 const App = () => {
 
@@ -273,6 +274,11 @@ const App = () => {
           <Route
             path="/hatemail"
             element={<Hatemail user={user}/>}
+          />
+
+          <Route
+            path="/MoodNotes"
+            element={<MoodNotes />}
           />
         </Route>
       </Routes>
