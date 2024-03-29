@@ -2,10 +2,13 @@ import React from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import Button from 'react-bootstrap/Button';
 
-const RewardItem = ({reward, purchaseReward}) => {
+import BuyButton from './BuyButton.jsx';
+import DisabledBuy from './DisabledBuy.jsx';
+
+const RewardItem = ({reward, purchaseReward, user}) => {
   const { stickerImg, price, id } = reward;
+  const { balance} = user;
 
   let cost;
   switch (price) {
@@ -20,11 +23,22 @@ const RewardItem = ({reward, purchaseReward}) => {
     break;
   }
 
+  const buttonPicker = () => {
+    if (user.balance - cost >= 0) {
+      return <BuyButton purchaseReward={purchaseReward} cost={cost} id={id} />;
+    } else {
+      return <DisabledBuy />;
+    }
+
+  };
+
   return (
     <Col>
       {cost}
       <Image src={stickerImg} />
-      <Button onClick={() => purchaseReward(cost, id)}>Buy!</Button>
+      {buttonPicker()}
+      {/* <BuyButton purchaseReward={purchaseReward} cost={cost} id={id} /> */}
+      {/* <Button onClick={() => purchaseReward(cost, id)}>Buy!</Button> */}
     </Col>
   );
 };

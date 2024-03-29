@@ -66,7 +66,7 @@ const RewardsStore = (props) => {
       <Container>
         <Row>
           {
-            rewards.map((reward) => <RewardItem key={reward.stickerId} reward={reward} purchaseReward={purchaseReward} /> )
+            rewards.map((reward) => <RewardItem key={reward.stickerId} user={user} reward={reward} purchaseReward={purchaseReward} /> )
           }
         </Row>
       </Container>
