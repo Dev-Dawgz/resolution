@@ -18,13 +18,10 @@ const RewardsStore = (props) => {
   const [balance, setBalance] = useState(props.balance);
 
   const [user, setUser] = useState(props.user);
-  // why is this value the index.html
-  console.log('state of user', user);
-  console.log('props user', props.user);
 
   const [purchased, setPurchased] = useState([]);
 
-
+  // think this may be needed for rewardsStore on page refresh, but breaks page
   // useEffect(() => {
   //   if (authUser) {
   //     setUsername(authUser.username);
@@ -32,33 +29,32 @@ const RewardsStore = (props) => {
   //   }
   // }, [authUser]);
 
-  // points now no longer show - balance state is accurate but user state is not
+  // any time points are changed, user should be updated to reflect new balance
   useEffect(() => {
     axios.get(`/wofRoutes/users/${props.user.id}`)
-      // .then(({data}) => {
-      .then((response) => {
-        console.log(response);
-        console.log('get wof user by id', data);
+      .then(({data}) => {
         setUser(data);
       })
       .catch((err) => console.error('failed finding user', err));
   }, [props.points]);
 
+  // function called whenever BuyButton is clicked
   const purchaseReward = (cost, rewardId) => {
-    console.log(cost, props.user.balance, rewardId, props.user.id);
+    // console.log(cost, props.user.balance, rewardId, props.user.id);
     if (props.user.balance >= cost) {
+      // add sticker and user to usersRewards table
       axios.post('/rewards/purchase', {
         cost, balance: props.user.balance, rewardId, userId: props.user.id
       })
         .then(({ data }) => {
-          console.log('post rewards purchase', data);
+          // refresh rewardsStore user/balance state
           setUser(data);
           setBalance(data.balance);
+          // refresh app user/balance state
           props.changeBalance(data, cost);
         });
     } else {
-      // need to display this to user
-      console.log('props.user.balance', props.user.balance);
+      // the buy button should no longer show up if not enough points
       console.log('not enough points!');
     }
   };

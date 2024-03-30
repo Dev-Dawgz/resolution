@@ -111,9 +111,6 @@ const App = () => {
       .then(({data}) => {
         setBalance(data.balance);
         setPoints(data.points);
-        // logged balance is no longer stale on update
-        console.log('getPoint axios data', data);
-        // setBalance(data.balance);
       })
       .catch((err) => {
         console.error('Failed axios GET user points: ', err);
@@ -225,30 +222,17 @@ const App = () => {
       points: newPoints,
       balance: newBalance
     })
-      // .then(() => {
-      //   return axios.get(`users/${user.id}`);
-      // })
-      // .then(({ data }) => {
-      //   const newPoints = data.balance + num;
-      //   setBalance(newPoints);
-      //   return axios.patch('rewards/balance', {
-      //     balance: newPoints,
-      //     id: user.id
-      //   });
-      // })
       .catch((err) => {
         console.error("Failed axios PATCH: ", err);
       });
     // window.location.reload(false);
   };
 
-  // i want this func to update the app balance and user state - will probably also want to pass in user
+  // user passed in is after balance has been updated
   const changeBalance = (user, num) => {
     const oldBalance = balance;
-    // const newBalance = balance - num;
     setUser(user);
     setBalance(oldBalance - num);
-
   };
 
   //ToastContainer used to alert users throughout application (see toast types in components for specific notifications)
