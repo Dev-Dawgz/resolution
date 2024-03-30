@@ -38,8 +38,16 @@ rewardsRouter.get('/:userId', (req, res) => {
     include: [{ model: Rewards, as: 'reward' }]
   })
     .then((response) => {
-      // we don't need the regular usersrewards data, just the reward for the rewardId
-      const rewards = response.map((row) => row.reward);
+      // we don't need the regular usersrewards data, just the reward for the rewardId - and the createdAt
+      // console.log('response', response);
+      const rewards = response.map((row) => {
+        console.log('purchased date', row.dataValues.createdAt);
+        console.log('row.reward', row.reward);
+        row.reward.dataValues.purchasedAt = row.dataValues.createdAt;
+        console.log('row reward after addition', row.reward.dataValues);
+        return row.reward;
+      });
+      // console.log('response post map', rewards);
       res.send(rewards);
     })
     .catch((err) => {
