@@ -49,7 +49,7 @@ const MoodMemos = () => {
               <Card.Title>Acknowledgment Rating: {memo.acRating}</Card.Title>
               <Card.Text>Reason: {memo.acReason}</Card.Text>
               <Card.Title>
-                Meditation Method Used: {memo.meditationName}
+                Meditation Method Used: {memo.meditationName ? memo.meditationName : 'None'}
               </Card.Title>
               <Card.Title>Reflect Rating: {memo.reflectRating}</Card.Title>
               <Card.Text>Thoughts: {memo.reflectReason}</Card.Text>
