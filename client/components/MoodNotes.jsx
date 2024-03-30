@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import CalmingMethod from './CalmingMethod.jsx';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const MoodNotes = () => {
   const [rating, setRating] = useState(4);
@@ -55,7 +56,7 @@ const MoodNotes = () => {
       reflectReason: postReason
     };
 
-    // help from team || needed to double up on 'mood'
+    // POST MoodNote data to db || help from team,  needed to double up on 'mood'
     axios.post('/mood/mood', newMoodNote)
       .then(() => {
         console.log('Note submitted');
@@ -68,6 +69,7 @@ const MoodNotes = () => {
   return (
     <div className="wof-component container">
       <h1 className="text-primary">MoodNotes</h1>
+      <Link to="/MoodMemos" className="btn btn-primary">MoodMemos</Link>
       <h5>Acknowledge</h5>
       <Form>
         <Form.Group controlId="range">

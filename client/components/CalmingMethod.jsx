@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import {Form} from 'react-bootstrap';
 
 const CalmingMethod = ({ changeMedName }) => {
-  const [selectedVideo, setSelectedVideo] = useState('cEqZthCaMpo');
+  const [selectedVideo, setSelectedVideo] = useState('');
   const videoOptions = {
+    '': 'No video selected',
     cEqZthCaMpo: 'MiniMoods - Stress',
     QtE00VP4W3Y: 'MiniMoods - Focus',
     LgRd1Mzhb_Q: 'MiniMoods - Racing Minds',
