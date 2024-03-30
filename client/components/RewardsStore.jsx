@@ -50,10 +50,10 @@ const RewardsStore = (props) => {
   // function called whenever BuyButton is clicked
   const purchaseReward = (cost, rewardId) => {
     // console.log(cost, props.user.balance, rewardId, props.user.id);
-    if (props.user.balance >= cost) {
+    if (balance >= cost) {
       // add sticker and user to usersRewards table
       axios.post('/rewards/purchase', {
-        cost, balance: props.user.balance, rewardId, userId: props.user.id
+        cost, balance: balance, rewardId, userId: props.user.id
       })
         .then(({ data }) => {
           // refresh rewardsStore user/balance state
