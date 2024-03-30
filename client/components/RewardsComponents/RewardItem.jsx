@@ -9,9 +9,9 @@ import Badge from 'react-bootstrap/Badge';
 import BuyButton from './BuyButton.jsx';
 import DisabledBuy from './DisabledBuy.jsx';
 
-const RewardItem = ({reward, purchaseReward, user}) => {
+const RewardItem = ({reward, purchaseReward, user, balance}) => {
   const { stickerImg, price, id, keyword } = reward;
-  const { balance} = user;
+  // const { balance} = user;
 
   let cost;
   switch (price) {
@@ -27,7 +27,7 @@ const RewardItem = ({reward, purchaseReward, user}) => {
   }
 
   const buttonPicker = () => {
-    if (user.balance - cost >= 0) {
+    if (balance - cost >= 0) {
       return <BuyButton purchaseReward={purchaseReward} cost={cost} id={id} />;
     } else {
       return <DisabledBuy />;

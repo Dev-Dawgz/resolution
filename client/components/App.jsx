@@ -35,6 +35,8 @@ const App = () => {
   const [ refresher, setRefresher ] = useState(0);
   // create points variable in state for current user
   const [ points, setPoints ] = useState('');
+  // create balance variable in state from current user
+  const [ balance, setBalance ] = useState('');
   // add top property to state, empty array initially
   const [ top, setTop ] = useState([]);
   // trophy state here to handle case where points are equal but trophies different
@@ -107,7 +109,11 @@ const App = () => {
     await axios.get(`/wofRoutes/users/${user.id}`)
       // grab points and assign to state
       .then(({data}) => {
+        setBalance(data.balance);
         setPoints(data.points);
+        // logged balance is no longer stale on update
+        console.log('getPoint axios data', data);
+        // setBalance(data.balance);
       })
       .catch((err) => {
         console.error('Failed axios GET user points: ', err);
@@ -194,7 +200,7 @@ const App = () => {
   };
 
   // function to add necessary points to current user
-  // also must update trophy
+  // also must update trophy - and balance
   const changePoints = (user, num) => {
     setRefresher(1);
     getPlacement();
@@ -207,24 +213,29 @@ const App = () => {
       // cap at zero
       newPoints = 0;
     }
+    const oldBalance = balance;
+    const newBalance = oldBalance + num;
+    setBalance(oldBalance + num);
     // reset points on state
     setPoints(oldPoints + num);
     // axios patch request
     axios.patch(`wofRoutes/users/${user.id}`, {
       // increment old points variable INSTEAD of incrementing points property directly
       // and set that to points
-      points: newPoints
+      points: newPoints,
+      balance: newBalance
     })
-      .then(() => {
-        return axios.get(`users/${user.id}`);
-      })
-      .then(({ data }) => {
-        const newPoints = data.balance + num;
-        return axios.patch('rewards/balance', {
-          balance: newPoints,
-          id: user.id
-        });
-      })
+      // .then(() => {
+      //   return axios.get(`users/${user.id}`);
+      // })
+      // .then(({ data }) => {
+      //   const newPoints = data.balance + num;
+      //   setBalance(newPoints);
+      //   return axios.patch('rewards/balance', {
+      //     balance: newPoints,
+      //     id: user.id
+      //   });
+      // })
       .catch((err) => {
         console.error("Failed axios PATCH: ", err);
       });
@@ -262,7 +273,7 @@ const App = () => {
             element={<WallOfFame changePoints={changePoints} />} />
           <Route
             path="/RewardsStore"
-            element={<RewardsStore user={user} />}
+            element={<RewardsStore user={user} balance={balance} />}
           />
           <Route
             path="/DecisionMaker"
