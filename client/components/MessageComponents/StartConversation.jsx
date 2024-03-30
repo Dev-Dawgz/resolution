@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import Conversation from './Conversation.jsx';
 import io from 'socket.io-client';
-import { post } from '../../../server/routes/conflictRouter.js';
+// import { post } from '../../../server/routes/conflictRouter.js';
 const socket = io();
 
 const StartConversation = (props) => {
@@ -68,12 +68,15 @@ const StartConversation = (props) => {
 
 
   const postConflict = () => {
-    axios.post('/api/createConflict', {
+    axios.post('/conflict/api/createConflict', {
       conflictType: "meme",
       positiveOrNegativeMeme: posOrNeg
     })
     .then((results) => {
       console.log('successful post meme conflict')
+    })
+    .catch((err) => {
+      console.error(err)
     })
   }
 
@@ -116,7 +119,7 @@ const StartConversation = (props) => {
         <h5 className={'text-danger'}>{ noUserMessage }</h5>
         <button className='btn btn-primary' onClick={() => { 
           sendMessage()
-        
+          postConflict()
         }}>send meme</button>
       </div>
       {' '}

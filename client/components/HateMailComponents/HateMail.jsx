@@ -66,6 +66,16 @@ const HateMail = ({ user }) => {
       });
   };
 
+  const postConflict = () => {
+    axios.post('/conflict/api/createConflict', {
+      conflictType: "HateMail",
+      positiveOrNegativeMeme: 'negative'
+    })
+    .then((results) => {
+      console.log('successful post hatemail conflict')
+    })
+  }
+
   return (
     <div>
       <div className="centered-container">
@@ -97,7 +107,9 @@ const HateMail = ({ user }) => {
               required
             />
           </div>
-          <button type="submit">Send Hatemail</button>
+          <button type="submit" onClick={() => {
+            postConflict()
+          }}>Send Hatemail</button>
         </form>
       </div>
       <div className="mail-list">

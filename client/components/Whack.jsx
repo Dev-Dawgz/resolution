@@ -105,7 +105,7 @@ const Whack = ({loggedIn}) => {
   };
 
   const postConflict = () => {
-    axios.post('/api/createConflict', {
+    axios.post('/conflict/api/createConflict', {
       conflictType: "whack",
       positiveOrNegativeMeme: 'negative'
     })
