@@ -6,6 +6,9 @@ const path = require('path');
 const passport = require('passport');
 const authRoutes = require('./routes/auth');
 const users = require('./routes/users');
+
+require('dotenv').config();
+
 // passport strategy
 const messageRouter = require('./routes/messagesHandling');
 const wofRouter = require('./routes/wofRoutes.js');

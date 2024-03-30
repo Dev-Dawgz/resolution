@@ -37,6 +37,8 @@ const App = () => {
   const [ refresher, setRefresher ] = useState(0);
   // create points variable in state for current user
   const [ points, setPoints ] = useState('');
+  // create balance variable in state from current user
+  const [ balance, setBalance ] = useState('');
   // add top property to state, empty array initially
   const [ top, setTop ] = useState([]);
   // trophy state here to handle case where points are equal but trophies different
@@ -109,6 +111,7 @@ const App = () => {
     await axios.get(`/wofRoutes/users/${user.id}`)
       // grab points and assign to state
       .then(({data}) => {
+        setBalance(data.balance);
         setPoints(data.points);
       })
       .catch((err) => {
@@ -196,7 +199,7 @@ const App = () => {
   };
 
   // function to add necessary points to current user
-  // also must update trophy
+  // also must update trophy - and balance
   const changePoints = (user, num) => {
     setRefresher(1);
     getPlacement();
@@ -209,19 +212,31 @@ const App = () => {
       // cap at zero
       newPoints = 0;
     }
+    const oldBalance = balance;
+    const newBalance = oldBalance + num;
+    setBalance(oldBalance + num);
     // reset points on state
     setPoints(oldPoints + num);
     // axios patch request
     axios.patch(`wofRoutes/users/${user.id}`, {
       // increment old points variable INSTEAD of incrementing points property directly
       // and set that to points
-      points: newPoints
+      points: newPoints,
+      balance: newBalance
     })
       .catch((err) => {
         console.error("Failed axios PATCH: ", err);
       });
     // window.location.reload(false);
   };
+
+  // user passed in is after balance has been updated
+  const changeBalance = (user, num) => {
+    const oldBalance = balance;
+    setUser(user);
+    setBalance(oldBalance - num);
+  };
+
   //ToastContainer used to alert users throughout application (see toast types in components for specific notifications)
   return (
     <BrowserRouter>
@@ -254,7 +269,7 @@ const App = () => {
             element={<WallOfFame changePoints={changePoints} />} />
           <Route
             path="/RewardsStore"
-            element={<RewardsStore user={user} />}
+            element={<RewardsStore user={user} changeBalance={changeBalance} balance={balance} />}
           />
           <Route
             path="/DecisionMaker"
@@ -268,7 +283,6 @@ const App = () => {
           />
           <Route
             path="/Controversy"
-            
             element={<Controversy user={user} />}
 
           />
