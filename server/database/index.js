@@ -6,7 +6,9 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
   username: 'root',
   password: '',
-  database: 'resolution'
+  database: 'resolution',
+  // added this so server console wasn't littered with logs
+  logging: false,
 });
 
 // Declare our schema. This is the shape of our data
@@ -92,6 +94,16 @@ const UsersRewards = sequelize.define('UsersRewards', {
       key: 'id'
     }
   }
+});
+
+UsersRewards.belongsTo(Rewards, {
+  foreignKey: 'rewardId',
+  as: 'reward'
+});
+
+UsersRewards.belongsTo(Users, {
+  foreignKey: 'userId',
+  as: 'user'
 });
 
 const Conversations = sequelize.define('Conversations', {
