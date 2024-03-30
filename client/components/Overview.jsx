@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OverviewConflict from "./OverviewConflict.jsx";
+import axios from "axios";
 
 function Overview() {
+    const [allConflicts, updateAllConflicts] = useState([])
+
+    function getAllConflicts() {
+        axios.get('/conflict/api/getAllConflicts')
+        .then((results) => {
+            const conflicts = [...results]
+            console.log(results)
+            updateAllConflicts(allConflicts)
+        })
+    }
+
+    useEffect(() => {
+        getAllConflicts()
+    }, [])
 
     return (
         <div>
@@ -10,7 +25,11 @@ function Overview() {
             <div>
                 <h2>Opened Conflicts:</h2>
                 <br />
-                <OverviewConflict closeButton="Close"/>
+                {
+                    allConflicts.map((conflict) => {
+                        <OverviewConflict conflictType={conflict.conflictType} opponentYouWhacked={conflict.opponentYouWhacked}/>
+                    })
+                }
                 <OverviewConflict closeButton="Close"/>
                 <OverviewConflict closeButton="Close"/>
             </div>

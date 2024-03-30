@@ -224,6 +224,9 @@ const OverviewConflicts = sequelize.define('OverviewConflicts', {
   decisionWinner: {
     type: DataTypes.INTEGER,
   }, 
+  opponentYouWhacked: {
+    type: DataTypes.STRING,
+  }, 
 }, {timestamps: true});
 
 const Mailboxes = sequelize.define('Mailboxes', {
