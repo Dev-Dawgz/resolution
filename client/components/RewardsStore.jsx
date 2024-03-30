@@ -1,5 +1,6 @@
 // import React, { useState, useEffect, useSelector } from 'react';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import axios from 'axios';
 
@@ -11,7 +12,7 @@ import RewardItem from './RewardsComponents/RewardItem.jsx';
 import PurchasedItem from './RewardsComponents/PurchasedItem.jsx';
 
 const RewardsStore = (props) => {
-  // const authUser = useSelector((state) => state.app.authUser);
+  const authUser = useSelector((state) => state.app.authUser);
 
   const [rewards, setRewards] = useState([]);
 
@@ -21,17 +22,25 @@ const RewardsStore = (props) => {
 
   const [purchased, setPurchased] = useState([]);
 
-  // think this may be needed for rewardsStore on page refresh, but breaks page
-  // useEffect(() => {
-  //   if (authUser) {
-  //     setUsername(authUser.username);
-  //     setStatus(authUser.status);
-  //   }
-  // }, [authUser]);
+  // this fixes the page refresh issue, but no longer update balance on increase
+  useEffect(() => {
+    if (authUser) {
+      // setUsername(authUser.username);
+      // setStatus(authUser.status);
+      console.log('authUser', authUser);
+      axios.get(`/wofRoutes/users/${authUser.id}`)
+        .then(({data}) => {
+          console.log(data);
+          setUser(data);
+          setBalance(data.balance);
+        })
+        .catch((err) => console.error('failed getting user', err));
+    }
+  }, [authUser]);
 
   // any time points are changed, user should be updated to reflect new balance
   useEffect(() => {
-    axios.get(`/wofRoutes/users/${props.user.id}`)
+    axios.get(`/wofRoutes/users/${user.id}`)
       .then(({data}) => {
         setUser(data);
       })
