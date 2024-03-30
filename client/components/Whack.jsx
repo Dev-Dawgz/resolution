@@ -14,6 +14,8 @@ const Whack = ({loggedIn}) => {
   const [user, setUser] = useState('...'); // set user (your opponent) state
   const [userPhoto, setUserPhoto] = useState(''); //set user photo src
   const [userId, setUserId] = useState();
+  const [posOrNeg, updatePosOrNeg] = useState('neutral')
+
 
   //function to handle toast/notification onClick/Whack
   //promise added to make toast async with whack toast success
@@ -102,6 +104,16 @@ const Whack = ({loggedIn}) => {
       });
   };
 
+  const postConflict = () => {
+    axios.post('/api/createConflict', {
+      conflictType: "whack",
+      positiveOrNegativeMeme: 'negative'
+    })
+    .then((results) => {
+      console.log('successful post whack conflict')
+    })
+  }
+
   // value to search username
   const handleChange = (e) => {
     e.preventDefault();
@@ -131,7 +143,10 @@ const Whack = ({loggedIn}) => {
       <h2>Your Piñata of {user}</h2>
       <div>
         <button className='btn btn-primary'
-          onClick={handleWhack}
+          onClick={() => {
+            handleWhack()
+            postConflict()
+          }}
         >Whack'em!</button>
        
       </div>

@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import Conversation from './Conversation.jsx';
 import io from 'socket.io-client';
+import { post } from '../../../server/routes/conflictRouter.js';
 const socket = io();
 
 const StartConversation = (props) => {
@@ -18,6 +19,9 @@ const StartConversation = (props) => {
   const [ meme, changeMeme ] = useState('Aint-Nobody-Got-Time-For-That');
 
   const [ recipient, setRecipient ] = useState(null);
+
+  //positive, negative, or neutral meme type
+  const [posOrNeg, updatePosOrNeg] = useState('neutral')
 
   const getRecipient = (username) => {
     axios.get(`/messagesHandling/user${username}`)
@@ -63,6 +67,15 @@ const StartConversation = (props) => {
   };
 
 
+  const postConflict = () => {
+    axios.post('/api/createConflict', {
+      conflictType: "meme",
+      positiveOrNegativeMeme: posOrNeg
+    })
+    .then((results) => {
+      console.log('successful post meme conflict')
+    })
+  }
 
   return (
     <div>
@@ -101,7 +114,10 @@ const StartConversation = (props) => {
         </select>
         <h3 className='text-primary'>click 'send meme' button to start conversation</h3>
         <h5 className={'text-danger'}>{ noUserMessage }</h5>
-        <button className='btn btn-primary' onClick={() => { sendMessage(); }}>send meme</button>
+        <button className='btn btn-primary' onClick={() => { 
+          sendMessage()
+        
+        }}>send meme</button>
       </div>
       {' '}
       <div style={{ width: '47%', float: 'right' }}>
