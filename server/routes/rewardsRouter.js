@@ -32,22 +32,16 @@ rewardsRouter.get('/', (req, res) => {
 
 rewardsRouter.get('/:userId', (req, res) => {
   const { userId } = req.params;
-  console.log(userId);
   UsersRewards.findAll({
     where: { userId },
     include: [{ model: Rewards, as: 'reward' }]
   })
     .then((response) => {
-      // we don't need the regular usersrewards data, just the reward for the rewardId - and the createdAt
-      // console.log('response', response);
+      // only hold onto createdAt value from usersRewards
       const rewards = response.map((row) => {
-        console.log('purchased date', row.dataValues.createdAt);
-        console.log('row.reward', row.reward);
         row.reward.dataValues.purchasedAt = row.dataValues.createdAt;
-        console.log('row reward after addition', row.reward.dataValues);
         return row.reward;
       });
-      // console.log('response post map', rewards);
       res.send(rewards);
     })
     .catch((err) => {

@@ -22,15 +22,11 @@ const RewardsStore = (props) => {
 
   const [purchased, setPurchased] = useState([]);
 
-  // this fixes the page refresh issue, but no longer update balance on increase
+  // allows page refresh
   useEffect(() => {
     if (authUser) {
-      // setUsername(authUser.username);
-      // setStatus(authUser.status);
-      console.log('authUser', authUser);
       axios.get(`/wofRoutes/users/${authUser.id}`)
         .then(({data}) => {
-          console.log(data);
           setUser(data);
           setBalance(data.balance);
         })
@@ -79,7 +75,6 @@ const RewardsStore = (props) => {
   useEffect(() => {
     axios.get('/rewards')
       .then(({data}) => {
-        // console.log(data);
         setRewards(data);
         return axios.get(`/rewards/${user.id}`);
       })
