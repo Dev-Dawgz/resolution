@@ -241,6 +241,16 @@ const App = () => {
       });
     // window.location.reload(false);
   };
+
+  // i want this func to update the app balance and user state - will probably also want to pass in user
+  const changeBalance = (user, num) => {
+    const oldBalance = balance;
+    // const newBalance = balance - num;
+    setUser(user);
+    setBalance(oldBalance - num);
+
+  };
+
   //ToastContainer used to alert users throughout application (see toast types in components for specific notifications)
   return (
     <BrowserRouter>
@@ -273,7 +283,7 @@ const App = () => {
             element={<WallOfFame changePoints={changePoints} />} />
           <Route
             path="/RewardsStore"
-            element={<RewardsStore user={user} balance={balance} />}
+            element={<RewardsStore user={user} changeBalance={changeBalance} balance={balance} />}
           />
           <Route
             path="/DecisionMaker"
@@ -287,7 +297,6 @@ const App = () => {
           />
           <Route
             path="/Controversy"
-            
             element={<Controversy user={user} />}
 
           />

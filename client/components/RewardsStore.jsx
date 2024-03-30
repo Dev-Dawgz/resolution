@@ -54,6 +54,7 @@ const RewardsStore = (props) => {
           console.log('post rewards purchase', data);
           setUser(data);
           setBalance(data.balance);
+          props.changeBalance(data, cost);
         });
     } else {
       // need to display this to user
