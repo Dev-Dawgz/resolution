@@ -93,6 +93,12 @@ const StartConversation = (props) => {
         <input className="form-control form-control-lg" value={topText} onChange={(e) => { updateTopText(e.target.value); }}></input>
         <h3 className='text-primary'>enter bottom text</h3>
         <input className="form-control form-control-lg" value={bottomText} onChange={(e) => { updateBottomText(e.target.value); }}></input>
+        <h3>Would you consider this meme positive, negative, or neutral?</h3>
+        <select >
+          <option value="positive">Positive</option>
+          <option value="negative">Negative</option>
+          <option value="neutral">Neutral</option>
+        </select>
         <h3 className='text-primary'>click 'send meme' button to start conversation</h3>
         <h5 className={'text-danger'}>{ noUserMessage }</h5>
         <button className='btn btn-primary' onClick={() => { sendMessage(); }}>send meme</button>
