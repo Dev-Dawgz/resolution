@@ -22,7 +22,7 @@ import ".././global.css";
 import { useDispatch } from "react-redux";
 import { setAuthUser, setIsAuthenticated } from "./store/appSlice.js";
 import MoodNotes from "./MoodNotes.jsx";
-import MoodMemos from "./MoodMemos.jsx";
+import MoodMemos from "./MoodNotesComponents/MoodMemos.jsx";
 
 const App = () => {
 
