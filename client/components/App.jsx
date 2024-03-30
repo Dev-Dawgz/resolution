@@ -278,7 +278,7 @@ const App = () => {
 
           <Route
             path="/MoodNotes"
-            element={<MoodNotes />}
+            element={<MoodNotes/>}
           />
         </Route>
       </Routes>

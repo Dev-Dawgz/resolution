@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import CalmingMethod from './CalmingMethod.jsx';
+import axios from 'axios';
 
 const MoodNotes = () => {
   const [rating, setRating] = useState(4);
@@ -8,6 +9,9 @@ const MoodNotes = () => {
 
   const [reason, setReason] = useState('');
   const [postReason, setPostReason] = useState('');
+
+  const [meditationName, setMeditationName] = useState('');
+
 
   const handleRatingChange = (event) => {
     let currRating = parseInt(event.target.value);
@@ -37,6 +41,30 @@ const MoodNotes = () => {
     setPostReason(event.target.value);
   };
 
+  const handleMeditationNameChange = (selected) => {
+    setMeditationName(selected);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const newMoodNote = {
+      acRating: rating,
+      acReason: reason,
+      meditationName: meditationName,
+      reflectRating: postRating,
+      reflectReason: postReason
+    };
+
+    // help from team || needed to double up on 'mood'
+    axios.post('/mood/mood', newMoodNote)
+      .then(() => {
+        console.log('Note submitted');
+      })
+      .catch((error) => {
+        console.error('Error submitting note', error);
+      });
+  };
+
   return (
     <div className="wof-component container">
       <h1 className="text-primary">MoodNotes</h1>
@@ -57,7 +85,7 @@ const MoodNotes = () => {
         onChange={handleReasonChange}
         placeholder="What contributed to this feeling?"
       />
-      <CalmingMethod />
+      <CalmingMethod changeMedName={handleMeditationNameChange} />
 
       <h5>Reflect</h5>
       <Form>
@@ -76,6 +104,7 @@ const MoodNotes = () => {
         onChange={handlePostReasonChange}
         placeholder="Reflection or notes..."
       />
+      <button type="submit" onClick={handleFormSubmit}>Submit</button>
     </div>
   );
 };

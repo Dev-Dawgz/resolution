@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const CalmingMethod = () => {
+const CalmingMethod = ({ changeMedName }) => {
   const [selectedVideo, setSelectedVideo] = useState('cEqZthCaMpo');
   const videoOptions = {
     cEqZthCaMpo: 'MiniMoods - Stress',
@@ -12,6 +12,7 @@ const CalmingMethod = () => {
 
   const handleChange = (event) => {
     setSelectedVideo(event.target.value);
+    changeMedName(videoOptions[event.target.value]);
   };
 
   return (
@@ -31,10 +32,10 @@ const CalmingMethod = () => {
             height="315"
             src={`https://www.youtube-nocookie.com/embed/${selectedVideo}?si=KIcPiiH_kpXtlrQr&amp;controls=0`}
             // only allow viewing in the vid player || removed fullscreen and some other stuff
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
         </div>
       )}
