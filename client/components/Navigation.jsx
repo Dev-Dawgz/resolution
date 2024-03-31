@@ -74,6 +74,16 @@ const Navigation = () => {
                 <NavLink
                   className="nav-link"
                   href="#"
+                  to="/MoodNotes"
+                  onClick={handleCollapseNav}
+                >
+                  MoodNotes
+                </NavLink>
+              </li>
+              <li className="nav-item" role="navigation">
+                <NavLink
+                  className="nav-link"
+                  href="#"
                   to="/DecisionMaker"
                   onClick={handleCollapseNav}
                 >

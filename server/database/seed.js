@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
 
-const { Users, Conversations, Messages, Void, News, Hatemail, Mailboxes, Rewards, UsersRewards, OverviewConflicts, db } = require('./index.js');
+const { Users, Conversations, Messages, Void, News, Hatemail, Mailboxes, Rewards, UsersRewards, OverviewConflicts, MoodNotes, db } = require('./index.js');
+// const { Users, Conversations, Messages, Void, News, Hatemail, Mailboxes, Rewards, UsersRewards, MoodNotes, db } = require('./index.js');
 
 require('dotenv').config;
 const axios = require('axios');
@@ -35,6 +36,8 @@ const seedSqlize = () => {
     .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'OverviewConflicts\' table successfully created!'))
     .then(() => axios.get(`http://127.0.0.1:4000/rewards/seed`))
     .then(() => console.log('\x1b[32m', `\nDatabase (MySQL): Successfully seeded rewards with data from stipop api!\n`, '\x1b[37m'))
+    .then(() => MoodNotes.sync({ force: true })) 
+    .then(() => console.log('\x1b[36m', '\nDatabase (MySQL): \'MoodNotes\' table successfully created!'))
     .then(() => Promise.all(require('./fakeData.js').map((txn) => Users.create(txn))))
     .then((arr) => console.log('\x1b[32m', `\nDatabase (MySQL): Successfully seeded users with ${arr.length} entries!\n`, '\x1b[37m'))
     .then(process.exit);

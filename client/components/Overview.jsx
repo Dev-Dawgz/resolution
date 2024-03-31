@@ -8,9 +8,9 @@ function Overview() {
     function getAllConflicts() {
         axios.get('/conflict/api/getAllConflicts')
         .then((results) => {
-            const conflicts = [...results]
-            console.log(results)
-            updateAllConflicts(allConflicts)
+            const conflicts = [...results.data]
+            console.log(conflicts)
+            updateAllConflicts(conflicts)
         })
     }
 
@@ -19,19 +19,24 @@ function Overview() {
     }, [])
 
     return (
-        <div>
-            <h1 className="wof-component">Overview</h1>
+        <div className="wof-component">
+            <h1 className="text-primary" >Overview</h1>
             <br />
             <div>
-                <h2>Opened Conflicts:</h2>
+                <h2 >Opened Conflicts:</h2>
                 <br />
+                {/* <button onClick={() => {
+                    getAllConflicts()
+                }}>hello</button> */}
                 {
                     allConflicts.map((conflict) => {
-                        <OverviewConflict conflictType={conflict.conflictType} opponentYouWhacked={conflict.opponentYouWhacked}/>
+                        return (
+                            <OverviewConflict hateSpeech={conflict.hateSpeech} posOrNeg={conflict.positiveOrNegativeMeme} conflictType={conflict.conflictType} opponentYouWhacked={conflict.opponentYouWhacked}/>
+                        )
                     })
                 }
-                <OverviewConflict closeButton="Close"/>
-                <OverviewConflict closeButton="Close"/>
+                <OverviewConflict />
+                <OverviewConflict />
             </div>
             <br />
             <br />
@@ -42,10 +47,10 @@ function Overview() {
             <div>
                 <h2>Closed Conflicts:</h2>
                 <br />
-                <OverviewConflict closeButton="Reopen"/>
-                <OverviewConflict closeButton="Reopen"/>
-                <OverviewConflict closeButton="Reopen"/>
-                <OverviewConflict closeButton="Reopen"/>
+                <OverviewConflict />
+                <OverviewConflict />
+                <OverviewConflict />
+                <OverviewConflict />
             </div>
         
         </div>

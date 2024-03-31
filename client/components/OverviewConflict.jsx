@@ -6,11 +6,7 @@ function OverviewConflict(props) {
 
     if(props.conflictType === 'whack'){
         return (
-            // <div >
-            //     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quasi magni explicabo sit officiis, perspiciatis, doloremque praesentium quos reprehenderit illum earum distinctio incidunt sunt quia.</p>
-            //     <button>{props.closeButton} Conflict</button>
-            // </div>
-            <Card style={{ width: '18rem' }}>
+            <Card className="wof-component container" >
       <Card.Body>
         <Card.Title>Whack Conflict</Card.Title>
           <Card.Text>
@@ -18,6 +14,32 @@ function OverviewConflict(props) {
         </Card.Text>
       </Card.Body>
     </Card>
+        )
+    }
+
+    if(props.conflictType === 'meme') {
+        return (
+        <Card className="wof-component container" >
+            <Card.Body>
+                <Card.Title>Meme Conflict</Card.Title>
+                <Card.Text>
+                You left {props.opponentYouWhacked} with a {props.posOrNeg} meme message!
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        )
+    }
+
+    if(props.conflictType === 'HateMail') {
+        return (
+        <Card className="wof-component container" >
+            <Card.Body>
+                <Card.Title>HateMail Conflict</Card.Title>
+                <Card.Text>
+                You left {props.opponentYouWhacked} with a hateful message stating, '{props.hatespeech}'!
+                </Card.Text>
+            </Card.Body>
+        </Card>
         )
     }
 }

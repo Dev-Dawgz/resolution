@@ -70,10 +70,12 @@ const StartConversation = (props) => {
   const postConflict = () => {
     axios.post('/conflict/api/createConflict', {
       conflictType: "meme",
-      positiveOrNegativeMeme: posOrNeg
+      positiveOrNegativeMeme: posOrNeg,
+      opponentYouWhacked: recipient.username
     })
     .then((results) => {
       console.log('successful post meme conflict')
+      console.log(recipient)
     })
     .catch((err) => {
       console.error(err)

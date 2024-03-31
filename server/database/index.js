@@ -12,79 +12,87 @@ const sequelize = new Sequelize({
 });
 
 // Declare our schema. This is the shape of our data
-const Users = sequelize.define('Users', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+const Users = sequelize.define(
+  'Users',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    username: DataTypes.STRING(100),
+    points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    balance: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    trophy: {
+      type: DataTypes.STRING(100),
+      defaultValue: 'Earn some points!',
+      allowNull: false,
+    },
+    email: DataTypes.STRING(100),
+    picture: DataTypes.STRING(100),
+    googleId: DataTypes.STRING(100),
+    status: DataTypes.STRING(100),
   },
-  username: DataTypes.STRING(100),
-  points: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false
-  },
-  balance: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false
-  },
-  trophy: {
-    type: DataTypes.STRING(100),
-    defaultValue: 'Earn some points!',
-    allowNull: false
-  },
-  email: DataTypes.STRING(100),
-  picture: DataTypes.STRING(100),
-  googleId: DataTypes.STRING(100),
-  status: DataTypes.STRING(100)
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-const Rewards = sequelize.define('Rewards', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true
+const Rewards = sequelize.define(
+  'Rewards',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    stickerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+    },
+    keyword: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    stickerImg: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    stickerImg_96: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
   },
-  stickerId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true
-  },
-  keyword: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  stickerImg: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  stickerImg_96: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  price: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  }
-}, {timestamps: true});
+  { timestamps: true }
+);
 
 const UsersRewards = sequelize.define('UsersRewards', {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   },
   rewardId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: Rewards,
-      key: 'id'
-    }
+      key: 'id',
+    },
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -92,8 +100,8 @@ const UsersRewards = sequelize.define('UsersRewards', {
     references: {
       model: Users,
       key: 'id'
-    }
-  }
+    },
+  },
 });
 
 UsersRewards.belongsTo(Rewards, {
@@ -106,15 +114,17 @@ UsersRewards.belongsTo(Users, {
   as: 'user'
 });
 
-const Conversations = sequelize.define('Conversations', {
-  userOneId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  },
+const Conversations = sequelize.define(
+  'Conversations',
+  {
+    userOneId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
   userTwoId: {
     type: DataTypes.INTEGER,
     allowNull: true,
@@ -136,79 +146,91 @@ const Conversations = sequelize.define('Conversations', {
   }
 }, {timestamps: true});
 
-const Messages = sequelize.define('Messages', {
-  senderId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: 'id'
-    }
+const Messages = sequelize.define(
+  'Messages',
+  {
+    senderId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
+    recipientId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
+    conversationId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Conversations,
+        key: 'id',
+      },
+    },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    img: {
+      type: DataTypes.STRING(100),
+    },
+    isPositive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
   },
-  recipientId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  },
-  conversationId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Conversations,
-      key: 'id'
-    }
-  },
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  img: {
-    type: DataTypes.STRING(100)
-  },
-  isPositive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-    allowNull: false
-  }
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-const Void = sequelize.define('Void', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+const Void = sequelize.define(
+  'Void',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    likes: DataTypes.INTEGER,
   },
-  text: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    }
-  },
-  likes: DataTypes.INTEGER
-}, {timestamps: true});
+  { timestamps: true }
+);
 
-const News = sequelize.define('News', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+const News = sequelize.define(
+  'News',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    headline: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   },
-  headline: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    }
-  }
-}, {timestamps: true});
+  { timestamps: true }
+);
 
 //new conflicts model
 const OverviewConflicts = sequelize.define('OverviewConflicts', {
@@ -239,6 +261,9 @@ const OverviewConflicts = sequelize.define('OverviewConflicts', {
   opponentYouWhacked: {
     type: DataTypes.STRING,
   }, 
+  hateSpeech: {
+    type: DataTypes.STRING,
+  }, 
 }, {timestamps: true});
 
 const Mailboxes = sequelize.define('Mailboxes', {
@@ -248,69 +273,109 @@ const Mailboxes = sequelize.define('Mailboxes', {
     references: {
       model: Users,
       key: 'id'
-    }
+    },
+    },
+    userTwoId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
   },
-  userTwoId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  },
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true
-  },
-}, {timestamps: true});
+  { timestamps: true }
+);
 
-const Hatemail = sequelize.define('Hatemail', {
-  senderId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: 'id'
-    }
+const Hatemail = sequelize.define(
+  'Hatemail',
+  {
+    senderId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
+    recipientId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: Users,
+        key: 'id',
+      },
+    },
+    conversationId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Mailboxes,
+        key: 'id',
+      },
+    },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    mail: {
+      type: DataTypes.STRING(100),
+    },
   },
-  recipientId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  },
-  conversationId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Mailboxes,
-      key: 'id'
-    }
-  },
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  mail: {
-    type: DataTypes.STRING(100)
-  }
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 Hatemail.belongsTo(Users, {
   foreignKey: 'senderId',
-  as: 'sender'
+  as: 'sender',
 });
 
 Hatemail.belongsTo(Users, {
   foreignKey: 'recipientId',
-  as: 'recipient'
+  as: 'recipient',
 });
+
+const MoodNotes = sequelize.define(
+  'MoodNotes',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    acRating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    acReason: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    meditationName: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    reflectRating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    reflectReason: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  },
+  { timestamps: true }
+);
+
 module.exports = {
   db: sequelize,
   Users,
@@ -322,5 +387,6 @@ module.exports = {
   Mailboxes,
   OverviewConflicts,
   Rewards,
-  UsersRewards
+  UsersRewards,
+  MoodNotes,
 };

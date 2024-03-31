@@ -69,7 +69,8 @@ const HateMail = ({ user }) => {
   const postConflict = () => {
     axios.post('/conflict/api/createConflict', {
       conflictType: "HateMail",
-      positiveOrNegativeMeme: 'negative'
+      positiveOrNegativeMeme: 'negative',
+      hateSpeech: text
     })
     .then((results) => {
       console.log('successful post hatemail conflict')

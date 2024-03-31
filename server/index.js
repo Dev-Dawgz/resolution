@@ -18,6 +18,7 @@ const homeRouter = require('./routes/homeRouter');
 const newsRouter = require('./routes/newsRoute');
 const hatemailRouter = require('./routes/hatemailRouter');
 const conflictRouter = require('./routes/conflictRouter');
+const MoodRouter = require('./routes/MoodRouter');
 
 
 const port = 4000;
@@ -60,6 +61,7 @@ app.use('/rewards', rewardsRouter);
 app.use('/messagesHandling', messageRouter);
 app.use('/hatemail', hatemailRouter);
 app.use('/conflict', conflictRouter);
+app.use('/mood', MoodRouter);
 // serve the uploads folder as a static directory
 app.use('/uploads', express.static('server/public/uploads'));
 
