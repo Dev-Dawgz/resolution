@@ -125,23 +125,26 @@ const Conversations = sequelize.define(
         key: 'id',
       },
     },
-    userTwoId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: Users,
-        key: 'id',
-      },
-    },
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+  userTwoId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: Users,
+      key: 'id'
+    }
   },
-  { timestamps: true }
-);
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  isPositive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  }
+}, {timestamps: true});
 
 const Messages = sequelize.define(
   'Messages',
@@ -229,16 +232,51 @@ const News = sequelize.define(
   { timestamps: true }
 );
 
-const Mailboxes = sequelize.define(
-  'Mailboxes',
-  {
-    userOneId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Users,
-        key: 'id',
-      },
+//new conflicts model
+const OverviewConflicts = sequelize.define('OverviewConflicts', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  conflictType: {
+    type: DataTypes.STRING,
+  }, 
+  closedCons: {
+    type: DataTypes.STRING,
+  }, 
+  conflictStatus: {
+    type: DataTypes.STRING,
+  }, 
+  memeCount: {
+    type: DataTypes.INTEGER,
+  }, 
+  positiveOrNegativeMeme: {
+    type: DataTypes.STRING,
+  }, 
+  decisionCount: {
+    type: DataTypes.INTEGER,
+  }, 
+  decisionWinner: {
+    type: DataTypes.INTEGER,
+  }, 
+  opponentYouWhacked: {
+    type: DataTypes.STRING,
+  }, 
+  hateSpeech: {
+    type: DataTypes.STRING,
+  }, 
+}, {timestamps: true});
+
+const Mailboxes = sequelize.define('Mailboxes', {
+  userOneId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Users,
+      key: 'id'
+    },
     },
     userTwoId: {
       type: DataTypes.INTEGER,
@@ -350,6 +388,7 @@ module.exports = {
   News,
   Hatemail,
   Mailboxes,
+  OverviewConflicts,
   Rewards,
   UsersRewards,
   MoodNotes,
