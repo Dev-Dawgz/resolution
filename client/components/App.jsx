@@ -91,6 +91,13 @@ const App = () => {
 
   useEffect(() => {
     fetchAuthUser();
+    axios.get('/rewards')
+      .then(({data}) => {
+        if (data.length === 0) {
+          return axios.get('/rewards/seed');
+        }
+      })
+      .catch((err) => console.error('failed getting rewards', err));
   }, []);
 
   const fetchAuthUser = async () => {

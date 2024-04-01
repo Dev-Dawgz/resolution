@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import OverviewConflict from "./OverviewConflict.jsx";
+import ClosedConflict from "./closedConflicts.jsx";
+import Card from 'react-bootstrap/Card';
+
 import axios from "axios";
 
 function Overview() {
     const [allConflicts, updateAllConflicts] = useState([])
+    const [closedConflicts, updateClosedConflicts] = useState([])
 
     function getAllConflicts() {
         axios.get('/conflict/api/getAllConflicts')
@@ -14,12 +18,14 @@ function Overview() {
         })
     }
 
+
+
     useEffect(() => {
         getAllConflicts()
-    }, [])
+    }, [allConflicts])
 
     return (
-        <div className="wof-component">
+        <div className="wof-component container">
             <h1 className="text-primary" >Overview</h1>
             <br />
             <div>
@@ -29,14 +35,9 @@ function Overview() {
                     getAllConflicts()
                 }}>hello</button> */}
                 {
-                    allConflicts.map((conflict) => {
-                        return (
-                            <OverviewConflict hateSpeech={conflict.hateSpeech} posOrNeg={conflict.positiveOrNegativeMeme} conflictType={conflict.conflictType} opponentYouWhacked={conflict.opponentYouWhacked}/>
-                        )
-                    })
+                            
+                            <OverviewConflict allConflictsProps={allConflicts} />
                 }
-                <OverviewConflict />
-                <OverviewConflict />
             </div>
             <br />
             <br />
@@ -47,10 +48,9 @@ function Overview() {
             <div>
                 <h2>Closed Conflicts:</h2>
                 <br />
-                <OverviewConflict />
-                <OverviewConflict />
-                <OverviewConflict />
-                <OverviewConflict />
+                {
+                    < ClosedConflict allConflictsProps={allConflicts} />
+                }
             </div>
         
         </div>

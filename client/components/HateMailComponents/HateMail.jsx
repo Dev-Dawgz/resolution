@@ -15,6 +15,7 @@ const HateMail = ({ user }) => {
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [mail, setMail] = useState([]);
 
+  const [recipientUsername, setRecipientUsername] = useState("")
   // const [mailboxUsernames, setMailboxUsernames] = useState([]);
   useEffect(() => {
     axios.get("/hatemail/api/recipients").then((response) => {
@@ -44,6 +45,10 @@ const HateMail = ({ user }) => {
     setSelectedRecipient(e.target.value);
   };
 
+  // const handleSetUsername = () => {
+  //   setRecipientUsername
+  // }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
@@ -70,7 +75,9 @@ const HateMail = ({ user }) => {
     axios.post('/conflict/api/createConflict', {
       conflictType: "HateMail",
       positiveOrNegativeMeme: 'negative',
-      hateSpeech: text
+      hateSpeech: text,
+      opponentYouWacked: recipientUsername,
+      conflictStatus: 'open'
     })
     .then((results) => {
       console.log('successful post hatemail conflict')
@@ -92,7 +99,9 @@ const HateMail = ({ user }) => {
             >
               <option value="">Select a recipient</option>
               {recipients.map((recipient) => (
-                <option key={recipient.id} value={recipient.id}>
+                <option key={recipient.id} value={recipient.id} onChange={() => {
+                  setRecipientUsername(recipient.username)
+                }}>
                   {recipient.username}
                 </option>
               ))}
@@ -110,6 +119,7 @@ const HateMail = ({ user }) => {
           </div>
           <button type="submit" onClick={() => {
             postConflict()
+            console.log('src', recipients)
           }}>Send Hatemail</button>
         </form>
       </div>

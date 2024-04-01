@@ -71,7 +71,8 @@ const StartConversation = (props) => {
     axios.post('/conflict/api/createConflict', {
       conflictType: "meme",
       positiveOrNegativeMeme: posOrNeg,
-      opponentYouWhacked: recipient.username
+      opponentYouWhacked: recipient.username,
+      conflictStatus: "open"
     })
     .then((results) => {
       console.log('successful post meme conflict')
@@ -111,7 +112,7 @@ const StartConversation = (props) => {
         <input className="form-control form-control-lg" value={topText} onChange={(e) => { updateTopText(e.target.value); }}></input>
         <h3 className='text-primary'>enter bottom text</h3>
         <input className="form-control form-control-lg" value={bottomText} onChange={(e) => { updateBottomText(e.target.value); }}></input>
-        <h3>Would you consider this meme positive, negative, or neutral?</h3>
+        <h3 className='text-primary'>Would you consider this meme positive, negative, or neutral?</h3>
         <select >
           <option value="positive">Positive</option>
           <option value="negative">Negative</option>

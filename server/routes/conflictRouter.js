@@ -25,4 +25,49 @@ conflictRouter.post('/api/createConflict', (req, res) => {
     })
 })
 
+conflictRouter.patch(`/api/updateStatus`, (req, res) => {
+    const { id, conflictStatus } = req.body;
+    console.log(req.body)
+  OverviewConflicts.update({ conflictStatus }, { where: { id } })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error('failed updating status', err);
+      res.sendStatus(500);
+    });
+    
+})
+
+conflictRouter.delete('/api/deleteConflict/:id', (req, res) => {
+    const {id} = req.params
+    OverviewConflicts.destroy({
+        where: {id}
+    })
+    .then((results) => {
+        console.log('delete conflict successful')
+        res.sendStatus(200)
+
+    })
+    .catch((err) => {
+        console.error(err)
+        res.sendStatus(500)
+    })
+})
+
+// conflictRouter.delete('/api/deleteConflict', (req, res) => {
+//     OverviewConflicts.destroy({
+//         where: req.body
+//     })
+//     .then((results) => {
+//         console.log('delete conflict successful')
+//         res.sendStatus(200)
+
+//     })
+//     .catch((err) => {
+//         console.error(err)
+//         res.sendStatus(500)
+//     })
+// })
+
 module.exports = conflictRouter

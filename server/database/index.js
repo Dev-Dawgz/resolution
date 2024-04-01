@@ -243,6 +243,9 @@ const OverviewConflicts = sequelize.define('OverviewConflicts', {
   conflictType: {
     type: DataTypes.STRING,
   }, 
+  closedCons: {
+    type: DataTypes.STRING,
+  }, 
   conflictStatus: {
     type: DataTypes.STRING,
   }, 
