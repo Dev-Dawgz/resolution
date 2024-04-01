@@ -74,12 +74,9 @@ const StartConversation = (props) => {
       opponentYouWhacked: recipient.username,
       conflictStatus: "open"
     })
-    .then((results) => {
-      console.log('successful post meme conflict')
-      console.log(recipient)
+    .then(() => {
     })
-    .catch((err) => {
-      console.error(err)
+    .catch(() => {
     })
   }
 

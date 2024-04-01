@@ -79,8 +79,7 @@ const HateMail = ({ user }) => {
       opponentYouWacked: recipientUsername,
       conflictStatus: 'open'
     })
-    .then((results) => {
-      console.log('successful post hatemail conflict')
+    .then(() => {
     })
   }
 

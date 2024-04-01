@@ -14,7 +14,6 @@ const Whack = ({loggedIn}) => {
   const [user, setUser] = useState('...'); // set user (your opponent) state
   const [userPhoto, setUserPhoto] = useState(''); //set user photo src
   const [userId, setUserId] = useState();
-  const [posOrNeg, updatePosOrNeg] = useState('neutral')
 
 
   //function to handle toast/notification onClick/Whack
@@ -111,8 +110,7 @@ const Whack = ({loggedIn}) => {
       opponentYouWhacked: user, 
       conflictStatus: 'open'
     })
-    .then((results) => {
-      console.log('successful post whack conflict', user)
+    .then(() => {
     })
   }
 

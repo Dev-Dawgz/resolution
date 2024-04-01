@@ -32,8 +32,7 @@ conflictRouter.patch(`/api/updateStatus`, (req, res) => {
     .then(() => {
       res.sendStatus(200);
     })
-    .catch((err) => {
-      console.error('failed updating status', err);
+    .catch(() => {
       res.sendStatus(500);
     });
     
@@ -44,30 +43,15 @@ conflictRouter.delete('/api/deleteConflict/:id', (req, res) => {
     OverviewConflicts.destroy({
         where: {id}
     })
-    .then((results) => {
-        console.log('delete conflict successful')
+    .then(() => {
         res.sendStatus(200)
 
     })
-    .catch((err) => {
-        console.error(err)
+    .catch(() => {
         res.sendStatus(500)
     })
 })
 
-// conflictRouter.delete('/api/deleteConflict', (req, res) => {
-//     OverviewConflicts.destroy({
-//         where: req.body
-//     })
-//     .then((results) => {
-//         console.log('delete conflict successful')
-//         res.sendStatus(200)
 
-//     })
-//     .catch((err) => {
-//         console.error(err)
-//         res.sendStatus(500)
-//     })
-// })
 
 module.exports = conflictRouter

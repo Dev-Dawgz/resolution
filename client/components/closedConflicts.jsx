@@ -8,7 +8,6 @@ function ClosedConflict(props) {
     function deleteHateConflict(id) {
         axios.delete(`/conflict/api/deleteConflict/${id}`)
         .then(() => {
-            console.log('successful delete from conflicts')
         })
     }
 
@@ -18,7 +17,6 @@ function ClosedConflict(props) {
             conflictStatus: "open"
         })
         .then(() => {
-            console.log('successful update to conflicts')
         })
     }
 

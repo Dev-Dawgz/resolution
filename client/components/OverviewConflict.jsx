@@ -11,7 +11,6 @@ function OverviewConflict(props) {
             conflictStatus: "closed"
         })
         .then(() => {
-            console.log('successful update to conflicts')
         })
     }
 
