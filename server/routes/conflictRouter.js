@@ -27,7 +27,6 @@ conflictRouter.post('/api/createConflict', (req, res) => {
 
 conflictRouter.patch(`/api/updateStatus`, (req, res) => {
     const { id, conflictStatus } = req.body;
-    console.log(req.body)
   OverviewConflicts.update({ conflictStatus }, { where: { id } })
     .then(() => {
       res.sendStatus(200);

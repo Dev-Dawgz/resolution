@@ -10,9 +10,9 @@ function Overview() {
     function getAllConflicts() {
         axios.get('/conflict/api/getAllConflicts')
         .then((results) => {
-            const conflicts = [...results.data]
-            console.log(conflicts)
-            updateAllConflicts(conflicts)
+            // const conflicts = [...results.data]
+            // console.log(conflicts)
+            updateAllConflicts(results.data)
         })
     }
 
