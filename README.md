@@ -29,6 +29,15 @@ Hatemail allows you to tell your friends, enemies, and everyone in between, exac
 
 **Controversy** - Did you have something to say? Speak on it! You are able to give your opinion or reply to a given controversial headline. 
 
+**MoodNotes** - If no one else will listen, MoodNotes will. Let's meditate and chill out together.
+
+**Overview** - Let's take a look at some of the conflicts you've gotten yourself into. Give it a try by sending a Meme, Whack, or Hate Mail.
+
+**Rewards Store** - Earn some points, buy some stickers! 
+
+Want to add:
+* Add functionality with bought stickers (from STIPOP API)
+
 # Developers
 
 **DOT ENV FILE**  
@@ -95,11 +104,13 @@ Thanks to all the following people for contributing to this project:
 [@BenjaminKlein](https://github.com/Benjaminklein99)
 [@SamsonThai](https://github.com/skanda108)
 [@JackieWisdom](https://github.com/wisdomjackie)
-[@NasthiaVillavicencio] (https://github.com/nasthia861)
-[@DarrylMcdonald] (https://github.com/ddmcdona06)
-[@DejuanEllswworth] (https://github.com/yeauxdejuan)
-[@LoganYoung] (https://github.com/lyoun318)
-[@PeytonOwen] (https://github.com/peytono)
+[@NasthiaVillavicencio](https://github.com/nasthia861)
+[@DarrylMcdonald](https://github.com/ddmcdona06)
+[@DejuanEllswworth](https://github.com/yeauxdejuan)
+[@LoganYoung](https://github.com/lyoun318)
+[@PeytonOwen](https://github.com/peytono)
+[@CamronCaldwell](https://github.com/ccaldwell11)
+[@KylanPatton](https://github.com/kycodee)
 
 # Contact Info
 If you have questions about the app and/or would like to get in touch. Feel free to contact any of the above contributors.

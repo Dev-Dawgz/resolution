@@ -8,7 +8,7 @@ const MoodMemos = () => {
 
   useEffect(() => {
     
-    // GET all MoodMemos user has and display the most recent first
+    // GET all MoodMemos user has and display the most recent first 
     axios
       .get('/mood/mood')
       .then((response) => {
