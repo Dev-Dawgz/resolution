@@ -39,6 +39,8 @@ HOST=http://127.0.0.1:4000
 GOOGLE_CLIENT_ID=(your own client ID)  
 GOOGLE_CLIENT_SECRET=(your own client secret)  
 MEDIASTACK_API_KEY=(your key from mediaStack)
+STIPOP_API_KEY=(your stipop api key)
+STIPOP_USER_ID=(your user ID)
 ```
 Tip-- Some may need to add quotes to their variable definitions; ex: ```NODE_ENV="development"```
 For deployment, HOST will be the instance address and not 127.0.0.1
@@ -83,6 +85,7 @@ For deployment, HOST will be the instance address and not 127.0.0.1
 - API: https://mediastack.com/signup
 - React-Toastify
 - React-Canvas
+- React-Bootstrap
 
 
 # Contributors
@@ -96,7 +99,7 @@ Thanks to all the following people for contributing to this project:
 [@DarrylMcdonald] (https://github.com/ddmcdona06)
 [@DejuanEllswworth] (https://github.com/yeauxdejuan)
 [@LoganYoung] (https://github.com/lyoun318)
-
+[@PeytonOwen] (https://github.com/peytono)
 
 # Contact Info
 If you have questions about the app and/or would like to get in touch. Feel free to contact any of the above contributors.
